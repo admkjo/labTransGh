@@ -37,106 +37,107 @@ public class DoctorPatientCirle implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "col_circle_id")
-    private String colCircleId;
+    private String circleId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "col_circle_code")
-    private String colCircleCode;
+    private String circleCode;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "col_doc_id")
-    private String colDocId;
+    private String docId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "col_patient_id")
-    private String colPatientId;
+    private String patientId;
     @Size(max = 45)
     @Column(name = "col_lab_session")
-    private String colLabSession;
+    private String labSession;
     @Column(name = "col_date_created")
     @Temporal(TemporalType.DATE)
-    private Date colDateCreated;
+    private Date dateCreated;
     @Size(max = 45)
     @Column(name = "col_deleted")
-    private String colDeleted;
+    private String deleted;
 
     public DoctorPatientCirle() {
     }
 
-    public DoctorPatientCirle(String colCircleId) {
-        this.colCircleId = colCircleId;
+    public DoctorPatientCirle(String circleId) {
+        this.circleId = circleId;
     }
 
-    public DoctorPatientCirle(String colCircleId, String colCircleCode, String colDocId, String colPatientId) {
-        this.colCircleId = colCircleId;
-        this.colCircleCode = colCircleCode;
-        this.colDocId = colDocId;
-        this.colPatientId = colPatientId;
+    public DoctorPatientCirle(String circleId, String circleCode, String docId, String patientId) {
+        this.circleId = circleId;
+        this.circleCode = circleCode;
+        this.docId = docId;
+        this.patientId = patientId;
     }
 
-    public String getColCircleId() {
-        return colCircleId;
+    public String getCircleId() {
+        return circleId;
     }
 
-    public void setColCircleId(String colCircleId) {
-        this.colCircleId = colCircleId;
+    public void setCircleId(String circleId) {
+        this.circleId = circleId;
     }
 
-    public String getColCircleCode() {
-        return colCircleCode;
+    public String getCircleCode() {
+        return circleCode;
     }
 
-    public void setColCircleCode(String colCircleCode) {
-        this.colCircleCode = colCircleCode;
+    public void setCircleCode(String circleCode) {
+        this.circleCode = circleCode;
     }
 
-    public String getColDocId() {
-        return colDocId;
+    public String getDocId() {
+        return docId;
     }
 
-    public void setColDocId(String colDocId) {
-        this.colDocId = colDocId;
+    public void setDocId(String docId) {
+        this.docId = docId;
     }
 
-    public String getColPatientId() {
-        return colPatientId;
+    public String getPatientId() {
+        return patientId;
     }
 
-    public void setColPatientId(String colPatientId) {
-        this.colPatientId = colPatientId;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 
-    public String getColLabSession() {
-        return colLabSession;
+    public String getLabSession() {
+        return labSession;
     }
 
-    public void setColLabSession(String colLabSession) {
-        this.colLabSession = colLabSession;
+    public void setLabSession(String labSession) {
+        this.labSession = labSession;
     }
 
-    public Date getColDateCreated() {
-        return colDateCreated;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setColDateCreated(Date colDateCreated) {
-        this.colDateCreated = colDateCreated;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public String getColDeleted() {
-        return colDeleted;
+    public String getDeleted() {
+        return deleted;
     }
 
-    public void setColDeleted(String colDeleted) {
-        this.colDeleted = colDeleted;
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
     }
 
+   
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (colCircleId != null ? colCircleId.hashCode() : 0);
+        hash += (circleId != null ? circleId.hashCode() : 0);
         return hash;
     }
 
@@ -147,7 +148,7 @@ public class DoctorPatientCirle implements Serializable {
             return false;
         }
         DoctorPatientCirle other = (DoctorPatientCirle) object;
-        if ((this.colCircleId == null && other.colCircleId != null) || (this.colCircleId != null && !this.colCircleId.equals(other.colCircleId))) {
+        if ((this.circleId == null && other.circleId != null) || (this.circleId != null && !this.circleId.equals(other.circleId))) {
             return false;
         }
         return true;
@@ -155,7 +156,7 @@ public class DoctorPatientCirle implements Serializable {
 
     @Override
     public String toString() {
-        return "com.labtrans.ejb.entities.DoctorPatientCirle[ colCircleId=" + colCircleId + " ]";
+        return "com.labtrans.ejb.entities.DoctorPatientCirle[ colCircleId=" + circleId + " ]";
     }
     
 }
