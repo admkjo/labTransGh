@@ -37,117 +37,117 @@ public class LabBranch implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "col_branch_id")
-    private String colBranchId;
+    private String branchId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "col_branch_code")
-    private String colBranchCode;
+    private String branchCode;
     @Size(max = 45)
     @Column(name = "col_labcode")
-    private String colLabcode;
+    private String labcode;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "col_branch_name")
-    private String colBranchName;
+    private String branchName;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "col_contact")
-    private String colContact;
+    private String contact;
     @Size(max = 45)
     @Column(name = "col_email")
-    private String colEmail;
+    private String email;
     @Column(name = "col_date_created")
     @Temporal(TemporalType.DATE)
-    private Date colDateCreated;
+    private Date dateCreated;
     @Size(max = 45)
     @Column(name = "col_deleted")
-    private String colDeleted;
+    private String deleted;
 
     public LabBranch() {
     }
 
-    public LabBranch(String colBranchId) {
-        this.colBranchId = colBranchId;
+    public LabBranch(String branchId) {
+        this.branchId = branchId;
     }
 
-    public LabBranch(String colBranchId, String colBranchCode, String colBranchName, String colContact) {
-        this.colBranchId = colBranchId;
-        this.colBranchCode = colBranchCode;
-        this.colBranchName = colBranchName;
-        this.colContact = colContact;
+    public LabBranch(String branchId, String branchCode, String branchName, String contact) {
+        this.branchId = branchId;
+        this.branchCode = branchCode;
+        this.branchName = branchName;
+        this.contact = contact;
     }
 
-    public String getColBranchId() {
-        return colBranchId;
+    public String getBranchId() {
+        return branchId;
     }
 
-    public void setColBranchId(String colBranchId) {
-        this.colBranchId = colBranchId;
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
     }
 
-    public String getColBranchCode() {
-        return colBranchCode;
+    public String getBranchCode() {
+        return branchCode;
     }
 
-    public void setColBranchCode(String colBranchCode) {
-        this.colBranchCode = colBranchCode;
+    public void setBranchCode(String branchCode) {
+        this.branchCode = branchCode;
     }
 
-    public String getColLabcode() {
-        return colLabcode;
+    public String getLabcode() {
+        return labcode;
     }
 
-    public void setColLabcode(String colLabcode) {
-        this.colLabcode = colLabcode;
+    public void setLabcode(String labcode) {
+        this.labcode = labcode;
     }
 
-    public String getColBranchName() {
-        return colBranchName;
+    public String getBranchName() {
+        return branchName;
     }
 
-    public void setColBranchName(String colBranchName) {
-        this.colBranchName = colBranchName;
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
     }
 
-    public String getColContact() {
-        return colContact;
+    public String getContact() {
+        return contact;
     }
 
-    public void setColContact(String colContact) {
-        this.colContact = colContact;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    public String getColEmail() {
-        return colEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setColEmail(String colEmail) {
-        this.colEmail = colEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Date getColDateCreated() {
-        return colDateCreated;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setColDateCreated(Date colDateCreated) {
-        this.colDateCreated = colDateCreated;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public String getColDeleted() {
-        return colDeleted;
+    public String getDeleted() {
+        return deleted;
     }
 
-    public void setColDeleted(String colDeleted) {
-        this.colDeleted = colDeleted;
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (colBranchId != null ? colBranchId.hashCode() : 0);
+        hash += (branchId != null ? branchId.hashCode() : 0);
         return hash;
     }
 
@@ -158,7 +158,7 @@ public class LabBranch implements Serializable {
             return false;
         }
         LabBranch other = (LabBranch) object;
-        if ((this.colBranchId == null && other.colBranchId != null) || (this.colBranchId != null && !this.colBranchId.equals(other.colBranchId))) {
+        if ((this.branchId == null && other.branchId != null) || (this.branchId != null && !this.branchId.equals(other.branchId))) {
             return false;
         }
         return true;
@@ -166,7 +166,7 @@ public class LabBranch implements Serializable {
 
     @Override
     public String toString() {
-        return "com.labtrans.ejb.entities.LabBranch[ colBranchId=" + colBranchId + " ]";
+        return "com.labtrans.ejb.entities.LabBranch[ branchId=" + branchId + " ]";
     }
-    
+
 }

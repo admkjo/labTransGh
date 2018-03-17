@@ -35,68 +35,68 @@ public class LabResults implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "col_lab_results_id")
-    private String colLabResultsId;
+    private String labResultsId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "col_lab_session")
-    private String colLabSession;
+    private String labSession;
     @Size(max = 255)
     @Column(name = "col_test_param_name")
-    private String colTestParamName;
+    private String testParamName;
     @Lob
     @Size(max = 65535)
     @Column(name = "col_test_param_value")
-    private String colTestParamValue;
+    private String testParamValue;
 
     public LabResults() {
     }
 
-    public LabResults(String colLabResultsId) {
-        this.colLabResultsId = colLabResultsId;
+    public LabResults(String labResultsId) {
+        this.labResultsId = labResultsId;
     }
 
-    public LabResults(String colLabResultsId, String colLabSession) {
-        this.colLabResultsId = colLabResultsId;
-        this.colLabSession = colLabSession;
+    public LabResults(String labResultsId, String labSession) {
+        this.labResultsId = labResultsId;
+        this.labSession = labSession;
     }
 
-    public String getColLabResultsId() {
-        return colLabResultsId;
+    public String getLabResultsId() {
+        return labResultsId;
     }
 
-    public void setColLabResultsId(String colLabResultsId) {
-        this.colLabResultsId = colLabResultsId;
+    public void setLabResultsId(String labResultsId) {
+        this.labResultsId = labResultsId;
     }
 
-    public String getColLabSession() {
-        return colLabSession;
+    public String getLabSession() {
+        return labSession;
     }
 
-    public void setColLabSession(String colLabSession) {
-        this.colLabSession = colLabSession;
+    public void setLabSession(String labSession) {
+        this.labSession = labSession;
     }
 
-    public String getColTestParamName() {
-        return colTestParamName;
+    public String getTestParamName() {
+        return testParamName;
     }
 
-    public void setColTestParamName(String colTestParamName) {
-        this.colTestParamName = colTestParamName;
+    public void setTestParamName(String testParamName) {
+        this.testParamName = testParamName;
     }
 
-    public String getColTestParamValue() {
-        return colTestParamValue;
+    public String getTestParamValue() {
+        return testParamValue;
     }
 
-    public void setColTestParamValue(String colTestParamValue) {
-        this.colTestParamValue = colTestParamValue;
+    public void setTestParamValue(String testParamValue) {
+        this.testParamValue = testParamValue;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (colLabResultsId != null ? colLabResultsId.hashCode() : 0);
+        hash += (labResultsId != null ? labResultsId.hashCode() : 0);
         return hash;
     }
 
@@ -107,7 +107,7 @@ public class LabResults implements Serializable {
             return false;
         }
         LabResults other = (LabResults) object;
-        if ((this.colLabResultsId == null && other.colLabResultsId != null) || (this.colLabResultsId != null && !this.colLabResultsId.equals(other.colLabResultsId))) {
+        if ((this.labResultsId == null && other.labResultsId != null) || (this.labResultsId != null && !this.labResultsId.equals(other.labResultsId))) {
             return false;
         }
         return true;
@@ -115,7 +115,7 @@ public class LabResults implements Serializable {
 
     @Override
     public String toString() {
-        return "com.labtrans.ejb.entities.LabResults[ colLabResultsId=" + colLabResultsId + " ]";
+        return "com.labtrans.ejb.entities.LabResults[ labResultsId=" + labResultsId + " ]";
     }
     
 }

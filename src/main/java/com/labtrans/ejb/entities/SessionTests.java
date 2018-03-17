@@ -34,10 +34,10 @@ public class SessionTests implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "col_session_test_id")
-    private String colSessionTestId;
+    private String sessionTestId;
     @Size(max = 255)
     @Column(name = "col_lab_session")
-    private String colLabSession;
+    private String labSession;
     @Size(max = 255)
     @Column(name = "test_id")
     private String testId;
@@ -45,24 +45,24 @@ public class SessionTests implements Serializable {
     public SessionTests() {
     }
 
-    public SessionTests(String colSessionTestId) {
-        this.colSessionTestId = colSessionTestId;
+    public SessionTests(String sessionTestId) {
+        this.sessionTestId = sessionTestId;
     }
 
-    public String getColSessionTestId() {
-        return colSessionTestId;
+    public String getSessionTestId() {
+        return sessionTestId;
     }
 
-    public void setColSessionTestId(String colSessionTestId) {
-        this.colSessionTestId = colSessionTestId;
+    public void setSessionTestId(String sessionTestId) {
+        this.sessionTestId = sessionTestId;
     }
 
-    public String getColLabSession() {
-        return colLabSession;
+    public String getLabSession() {
+        return labSession;
     }
 
-    public void setColLabSession(String colLabSession) {
-        this.colLabSession = colLabSession;
+    public void setLabSession(String labSession) {
+        this.labSession = labSession;
     }
 
     public String getTestId() {
@@ -76,7 +76,7 @@ public class SessionTests implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (colSessionTestId != null ? colSessionTestId.hashCode() : 0);
+        hash += (sessionTestId != null ? sessionTestId.hashCode() : 0);
         return hash;
     }
 
@@ -87,7 +87,7 @@ public class SessionTests implements Serializable {
             return false;
         }
         SessionTests other = (SessionTests) object;
-        if ((this.colSessionTestId == null && other.colSessionTestId != null) || (this.colSessionTestId != null && !this.colSessionTestId.equals(other.colSessionTestId))) {
+        if ((this.sessionTestId == null && other.sessionTestId != null) || (this.sessionTestId != null && !this.sessionTestId.equals(other.sessionTestId))) {
             return false;
         }
         return true;
@@ -95,7 +95,7 @@ public class SessionTests implements Serializable {
 
     @Override
     public String toString() {
-        return "com.labtrans.ejb.entities.SessionTests[ colSessionTestId=" + colSessionTestId + " ]";
+        return "com.labtrans.ejb.entities.SessionTests[ sessionTestId=" + sessionTestId + " ]";
     }
     
 }

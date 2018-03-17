@@ -34,136 +34,136 @@ public class LabAccount implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "col_id")
-    private String colId;
+    private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 128)
     @Column(name = "col_labcode")
-    private String colLabcode;
+    private String labcode;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 64)
     @Column(name = "col_name_of_orginazation")
-    private String colNameOfOrginazation;
+    private String nameOfOrginazation;
     @Size(max = 45)
     @Column(name = "col_location")
-    private String colLocation;
+    private String location;
     @Size(max = 45)
     @Column(name = "col_region")
-    private String colRegion;
+    private String region;
     @Size(max = 45)
     @Column(name = "col_contact")
-    private String colContact;
+    private String contact;
     @Size(max = 45)
     @Column(name = "col_username")
-    private String colUsername;
+    private String username;
     @Size(max = 45)
     @Column(name = "col_password")
-    private String colPassword;
+    private String password;
     @Size(max = 45)
     @Column(name = "col_date_created")
-    private String colDateCreated;
+    private String dateCreated;
     @Size(max = 45)
     @Column(name = "col_deleted")
-    private String colDeleted;
+    private String deleted;
 
     public LabAccount() {
     }
 
-    public LabAccount(String colId) {
-        this.colId = colId;
+    public LabAccount(String id) {
+        this.id = id;
     }
 
-    public LabAccount(String colId, String colLabcode, String colNameOfOrginazation) {
-        this.colId = colId;
-        this.colLabcode = colLabcode;
-        this.colNameOfOrginazation = colNameOfOrginazation;
+    public LabAccount(String id, String labcode, String nameOfOrginazation) {
+        this.id = id;
+        this.labcode = labcode;
+        this.nameOfOrginazation = nameOfOrginazation;
     }
 
-    public String getColId() {
-        return colId;
+    public String getId() {
+        return id;
     }
 
-    public void setColId(String colId) {
-        this.colId = colId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getColLabcode() {
-        return colLabcode;
+    public String getLabcode() {
+        return labcode;
     }
 
-    public void setColLabcode(String colLabcode) {
-        this.colLabcode = colLabcode;
+    public void setLabcode(String labcode) {
+        this.labcode = labcode;
     }
 
-    public String getColNameOfOrginazation() {
-        return colNameOfOrginazation;
+    public String getNameOfOrginazation() {
+        return nameOfOrginazation;
     }
 
-    public void setColNameOfOrginazation(String colNameOfOrginazation) {
-        this.colNameOfOrginazation = colNameOfOrginazation;
+    public void setNameOfOrginazation(String nameOfOrginazation) {
+        this.nameOfOrginazation = nameOfOrginazation;
     }
 
-    public String getColLocation() {
-        return colLocation;
+    public String getLocation() {
+        return location;
     }
 
-    public void setColLocation(String colLocation) {
-        this.colLocation = colLocation;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getColRegion() {
-        return colRegion;
+    public String getRegion() {
+        return region;
     }
 
-    public void setColRegion(String colRegion) {
-        this.colRegion = colRegion;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public String getColContact() {
-        return colContact;
+    public String getContact() {
+        return contact;
     }
 
-    public void setColContact(String colContact) {
-        this.colContact = colContact;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    public String getColUsername() {
-        return colUsername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setColUsername(String colUsername) {
-        this.colUsername = colUsername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getColPassword() {
-        return colPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setColPassword(String colPassword) {
-        this.colPassword = colPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getColDateCreated() {
-        return colDateCreated;
+    public String getDateCreated() {
+        return dateCreated;
     }
 
-    public void setColDateCreated(String colDateCreated) {
-        this.colDateCreated = colDateCreated;
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public String getColDeleted() {
-        return colDeleted;
+    public String getDeleted() {
+        return deleted;
     }
 
-    public void setColDeleted(String colDeleted) {
-        this.colDeleted = colDeleted;
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (colId != null ? colId.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -174,7 +174,7 @@ public class LabAccount implements Serializable {
             return false;
         }
         LabAccount other = (LabAccount) object;
-        if ((this.colId == null && other.colId != null) || (this.colId != null && !this.colId.equals(other.colId))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -182,7 +182,7 @@ public class LabAccount implements Serializable {
 
     @Override
     public String toString() {
-        return "com.labtrans.ejb.entities.LabAccount[ colId=" + colId + " ]";
+        return "com.labtrans.ejb.entities.LabAccount[ id=" + id + " ]";
     }
-    
+
 }

@@ -37,137 +37,133 @@ public class LabStaff implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "col_staff_id")
-    private Integer colStaffId;
+    private Integer staffId;
     @Size(max = 45)
     @Column(name = "col_user_code")
-    private String colUserCode;
+    private String userCode;
     @Size(max = 45)
     @Column(name = "col_labcode")
-    private String colLabcode;
+    private String labcode;
     @Size(max = 45)
     @Column(name = "col_branch_code")
-    private String colBranchCode;
+    private String branchCode;
     @Size(max = 45)
     @Column(name = "col_fullname")
-    private String colFullname;
+    private String fullname;
     @Size(max = 45)
     @Column(name = "col_email")
-    private String colEmail;
+    private String email;
     @Size(max = 45)
     @Column(name = "col_username")
-    private String colUsername;
+    private String username;
     @Size(max = 45)
     @Column(name = "col_password")
-    private String colPassword;
+    private String password;
     @Size(max = 45)
     @Column(name = "col_phone")
-    private String colPhone;
+    private String phone;
     @Column(name = "col_date_created")
     @Temporal(TemporalType.DATE)
-    private Date colDateCreated;
+    private Date dateCreated;
     @Size(max = 45)
     @Column(name = "col_deleted")
-    private String colDeleted;
+    private String deleted;
 
     public LabStaff() {
     }
 
-    public LabStaff(Integer colStaffId) {
-        this.colStaffId = colStaffId;
+    public LabStaff(Integer staffId) {
+        this.staffId = staffId;
     }
 
-    public Integer getColStaffId() {
-        return colStaffId;
+    public Integer getStaffId() {
+        return staffId;
     }
 
-    public void setColStaffId(Integer colStaffId) {
-        this.colStaffId = colStaffId;
+    public String getUserCode() {
+        return userCode;
     }
 
-    public String getColUserCode() {
-        return colUserCode;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
-    public void setColUserCode(String colUserCode) {
-        this.colUserCode = colUserCode;
+    public String getLabcode() {
+        return labcode;
     }
 
-    public String getColLabcode() {
-        return colLabcode;
+    public void setLabcode(String labcode) {
+        this.labcode = labcode;
     }
 
-    public void setColLabcode(String colLabcode) {
-        this.colLabcode = colLabcode;
+    public String getBranchCode() {
+        return branchCode;
     }
 
-    public String getColBranchCode() {
-        return colBranchCode;
+    public void setBranchCode(String branchCode) {
+        this.branchCode = branchCode;
     }
 
-    public void setColBranchCode(String colBranchCode) {
-        this.colBranchCode = colBranchCode;
+    public String getFullname() {
+        return fullname;
     }
 
-    public String getColFullname() {
-        return colFullname;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public void setColFullname(String colFullname) {
-        this.colFullname = colFullname;
+    public String getEmail() {
+        return email;
     }
 
-    public String getColEmail() {
-        return colEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setColEmail(String colEmail) {
-        this.colEmail = colEmail;
+    public String getUsername() {
+        return username;
     }
 
-    public String getColUsername() {
-        return colUsername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setColUsername(String colUsername) {
-        this.colUsername = colUsername;
+    public String getPassword() {
+        return password;
     }
 
-    public String getColPassword() {
-        return colPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setColPassword(String colPassword) {
-        this.colPassword = colPassword;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getColPhone() {
-        return colPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setColPhone(String colPhone) {
-        this.colPhone = colPhone;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public Date getColDateCreated() {
-        return colDateCreated;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public void setColDateCreated(Date colDateCreated) {
-        this.colDateCreated = colDateCreated;
+    public String getDeleted() {
+        return deleted;
     }
 
-    public String getColDeleted() {
-        return colDeleted;
-    }
-
-    public void setColDeleted(String colDeleted) {
-        this.colDeleted = colDeleted;
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (colStaffId != null ? colStaffId.hashCode() : 0);
+        hash += (staffId != null ? staffId.hashCode() : 0);
         return hash;
     }
 
@@ -178,7 +174,7 @@ public class LabStaff implements Serializable {
             return false;
         }
         LabStaff other = (LabStaff) object;
-        if ((this.colStaffId == null && other.colStaffId != null) || (this.colStaffId != null && !this.colStaffId.equals(other.colStaffId))) {
+        if ((this.staffId == null && other.staffId != null) || (this.staffId != null && !this.staffId.equals(other.staffId))) {
             return false;
         }
         return true;
@@ -186,7 +182,7 @@ public class LabStaff implements Serializable {
 
     @Override
     public String toString() {
-        return "com.labtrans.ejb.entities.LabStaff[ colStaffId=" + colStaffId + " ]";
+        return "com.labtrans.ejb.entities.LabStaff[ staffId=" + staffId + " ]";
     }
-    
+
 }

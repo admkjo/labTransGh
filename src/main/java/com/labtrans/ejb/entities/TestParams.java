@@ -34,60 +34,57 @@ public class TestParams implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "col_test_param_id")
-    private String colTestParamId;
+    private String testParamId;
     @Size(max = 255)
     @Column(name = "col_test_id")
-    private String colTestId;
+    private String testId;
     @Size(max = 255)
     @Column(name = "col_parameter")
-    private String colParameter;
+    private String parameter;
     @Size(max = 45)
     @Column(name = "col_deleted")
-    private String colDeleted;
+    private String deleted;
 
     public TestParams() {
     }
 
-    public TestParams(String colTestParamId) {
-        this.colTestParamId = colTestParamId;
+    public TestParams(String testParamId) {
+        this.testParamId = testParamId;
     }
 
-    public String getColTestParamId() {
-        return colTestParamId;
+    public String getTestParamId() {
+        return testParamId;
     }
 
-    public void setColTestParamId(String colTestParamId) {
-        this.colTestParamId = colTestParamId;
+    public String getTestId() {
+        return testId;
     }
 
-    public String getColTestId() {
-        return colTestId;
+    public void setTestId(String testId) {
+        this.testId = testId;
     }
 
-    public void setColTestId(String colTestId) {
-        this.colTestId = colTestId;
+    public String getParameter() {
+        return parameter;
     }
 
-    public String getColParameter() {
-        return colParameter;
+    public void setParameter(String parameter) {
+        this.parameter = parameter;
     }
 
-    public void setColParameter(String colParameter) {
-        this.colParameter = colParameter;
+    public String getDeleted() {
+        return deleted;
     }
 
-    public String getColDeleted() {
-        return colDeleted;
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
     }
 
-    public void setColDeleted(String colDeleted) {
-        this.colDeleted = colDeleted;
-    }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (colTestParamId != null ? colTestParamId.hashCode() : 0);
+        hash += (testParamId != null ? testParamId.hashCode() : 0);
         return hash;
     }
 
@@ -98,7 +95,7 @@ public class TestParams implements Serializable {
             return false;
         }
         TestParams other = (TestParams) object;
-        if ((this.colTestParamId == null && other.colTestParamId != null) || (this.colTestParamId != null && !this.colTestParamId.equals(other.colTestParamId))) {
+        if ((this.testParamId == null && other.testParamId != null) || (this.testParamId != null && !this.testParamId.equals(other.testParamId))) {
             return false;
         }
         return true;
@@ -106,7 +103,7 @@ public class TestParams implements Serializable {
 
     @Override
     public String toString() {
-        return "com.labtrans.ejb.entities.TestParams[ colTestParamId=" + colTestParamId + " ]";
+        return "com.labtrans.ejb.entities.TestParams[ testParamId=" + testParamId + " ]";
     }
     
 }

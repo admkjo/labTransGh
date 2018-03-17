@@ -37,93 +37,33 @@ public class LabBranchPatients implements Serializable {
     @NotNull
     @Size(min = 1, max = 11)
     @Column(name = "col_lab_branch_id")
-    private String colLabBranchId;
+    private String labBranchId;
     @Size(max = 45)
     @Column(name = "code_lab_branch_code")
-    private String codeLabBranchCode;
+    private String labBranchCode;
     @Size(max = 45)
     @Column(name = "col_labcode")
-    private String colLabcode;
+    private String labcode;
     @Size(max = 45)
     @Column(name = "col_branch_code")
-    private String colBranchCode;
+    private String branchCode;
     @Size(max = 45)
     @Column(name = "col_patient_id")
-    private String colPatientId;
+    private String patientId;
     @Column(name = "col_date_created")
     @Temporal(TemporalType.DATE)
-    private Date colDateCreated;
+    private Date dateCreated;
     @Size(max = 45)
     @Column(name = "col_deleted_no")
-    private String colDeletedNo;
+    private String deletedNo;
 
     public LabBranchPatients() {
-    }
-
-    public LabBranchPatients(String colLabBranchId) {
-        this.colLabBranchId = colLabBranchId;
-    }
-
-    public String getColLabBranchId() {
-        return colLabBranchId;
-    }
-
-    public void setColLabBranchId(String colLabBranchId) {
-        this.colLabBranchId = colLabBranchId;
-    }
-
-    public String getCodeLabBranchCode() {
-        return codeLabBranchCode;
-    }
-
-    public void setCodeLabBranchCode(String codeLabBranchCode) {
-        this.codeLabBranchCode = codeLabBranchCode;
-    }
-
-    public String getColLabcode() {
-        return colLabcode;
-    }
-
-    public void setColLabcode(String colLabcode) {
-        this.colLabcode = colLabcode;
-    }
-
-    public String getColBranchCode() {
-        return colBranchCode;
-    }
-
-    public void setColBranchCode(String colBranchCode) {
-        this.colBranchCode = colBranchCode;
-    }
-
-    public String getColPatientId() {
-        return colPatientId;
-    }
-
-    public void setColPatientId(String colPatientId) {
-        this.colPatientId = colPatientId;
-    }
-
-    public Date getColDateCreated() {
-        return colDateCreated;
-    }
-
-    public void setColDateCreated(Date colDateCreated) {
-        this.colDateCreated = colDateCreated;
-    }
-
-    public String getColDeletedNo() {
-        return colDeletedNo;
-    }
-
-    public void setColDeletedNo(String colDeletedNo) {
-        this.colDeletedNo = colDeletedNo;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (colLabBranchId != null ? colLabBranchId.hashCode() : 0);
+        hash += (labBranchId != null ? labBranchId.hashCode() : 0);
         return hash;
     }
 
@@ -134,7 +74,7 @@ public class LabBranchPatients implements Serializable {
             return false;
         }
         LabBranchPatients other = (LabBranchPatients) object;
-        if ((this.colLabBranchId == null && other.colLabBranchId != null) || (this.colLabBranchId != null && !this.colLabBranchId.equals(other.colLabBranchId))) {
+        if ((this.labBranchId == null && other.labBranchId != null) || (this.labBranchId != null && !this.labBranchId.equals(other.labBranchId))) {
             return false;
         }
         return true;
@@ -142,7 +82,7 @@ public class LabBranchPatients implements Serializable {
 
     @Override
     public String toString() {
-        return "com.labtrans.ejb.entities.LabBranchPatients[ colLabBranchId=" + colLabBranchId + " ]";
+        return "com.labtrans.ejb.entities.LabBranchPatients[ labBranchId=" + labBranchId + " ]";
     }
     
 }
