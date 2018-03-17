@@ -24,7 +24,7 @@ public class LabAccountBean {
     @PersistenceContext(unitName = "LabTransGh-PU")
     private EntityManager em;
 
-    public String labAccountCreate(LabAccount labAccount) {
+    public Integer labAccountCreate(LabAccount labAccount) {
         try {
             em.persist(labAccount);
             em.flush();
@@ -149,15 +149,15 @@ public class LabAccountBean {
         return new ArrayList<LabAccount>();
     }
 
-    public LabAccount labAccountLogin(String phonenumber, String pincode) {
+    public LabAccount labAccountLogin(String username, String password) {
         String qryString = "";
         LabAccount labAccount;
-        pincode = PasswordUtils.digestPassword(pincode);
+        password = PasswordUtils.digestPassword(password);
         try {
-            qryString = " SELECT l FROM LabAccount l where l.phonenumber =:phonenumber and l.pincode=:pincode";
+            qryString = " SELECT l FROM LabAccount l where l.username =:username and l.password=:password";
             TypedQuery<LabAccount> query = em.createQuery(qryString, LabAccount.class);
-            query.setParameter("phonenumber", phonenumber);
-            query.setParameter("pincode", pincode);
+            query.setParameter("username", username);
+            query.setParameter("password", password);
             labAccount = query.getSingleResult();
             return labAccount;
         } catch (Exception e) {

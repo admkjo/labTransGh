@@ -1,13 +1,12 @@
 package com.labtrans.api.restfulresources;
 
-import com.labtrans.ejb.entities.LabSession;
-import com.labtrans.ejb.entities.Patient;
-import com.labtrans.ejb.sessionbean.LabSessionBean;
-import com.labtrans.ejb.sessionbean.PatientBean;
+import com.labtrans.ejb.entities.LabAccount;
+import com.labtrans.ejb.sessionbean.LabAccountBean;
 import com.labtrans.jwtfilter.JWTTokenNeeded;
 import com.labtrans.util.JWTokenUtility;
 import com.labtrans.util.PasswordUtils;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -30,7 +29,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author Adm_Kjo
  */
-@Path("/patient")
+@Path("/labaccount")
 @Produces(APPLICATION_JSON)
 @Consumes(APPLICATION_JSON)
 @Transactional
@@ -38,26 +37,67 @@ import org.apache.commons.lang3.StringUtils;
 public class LabAccountEndPoint {
 
     @EJB
-    private PatientBean patientBean;
-    @EJB
-    private LabSessionBean labSessionBean;
-    private static final Logger LOGGER = Logger.getLogger(PatientBean.class.getName());
+    private LabAccountBean labAccountBean;
+    private static final Logger LOGGER = Logger.getLogger(LabAccountEndPoint.class.getName());
+
+    @POST
+    @Path("/createaccount")
+    @Consumes(APPLICATION_FORM_URLENCODED)
+    public Response create(
+            @FormParam("nameOfOrginazation") String nameOfOrginazation,
+            @FormParam("location") String location,
+            @FormParam("region") String region,
+            @FormParam("contact") String contact,
+            @FormParam("username") String username,
+            @FormParam("password") String password
+    ) {
+        try {
+            //check for empty inputs
+            if (StringUtils.isNotBlank(password) && StringUtils.isNotBlank(nameOfOrginazation)
+                    && StringUtils.isNotBlank(location) && StringUtils.isNotBlank(region)
+                    && StringUtils.isNotBlank(contact) && StringUtils.isNotBlank(username)) {
+            } else {
+                return Response.ok("Please Complete All Fields").build();
+            }
+            String labcode = "LAB-" + nameOfOrginazation +new Date().toString();
+            password = PasswordUtils.digestPassword(password);
+            LabAccount labAccount = new LabAccount();
+            labAccount.setPassword(password);
+            labAccount.setNameOfOrginazation(nameOfOrginazation);
+            labAccount.setLocation(location);
+            labAccount.setRegion(region);
+            labAccount.setContact(contact);
+            labAccount.setUsername(username);
+            labAccount.setDateCreated(new Date());
+            labAccount.setLabcode(labcode);
+
+           Integer LabId = labAccountBean.labAccountCreate(labAccount);
+            if (LabId == null) {
+                return Response.ok("UNABLE TO CREATE ACCOUNT").build();
+            }
+            return Response.ok(LabId).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @POST
     @Path("/login")
     @Consumes(APPLICATION_FORM_URLENCODED)
     public Response authenticateUser(
-            @FormParam("phonenumber") String phonenumber,
-            @FormParam("pincode") String pincode) {
+            @FormParam("username") String username,
+            @FormParam("password") String password) {
         try {
-            LOGGER.info("#### login/password : " + phonenumber + "/" + pincode);
+            LOGGER.info("#### login/password : " + username + "/" + password);
             // Authenticate the user using the credentials provided
-            Patient patient = patientBean.patientLogin(phonenumber, pincode);
-            if (patient == null) {
+            LabAccount labAccount = labAccountBean.labAccountLogin(username, password);
+            if (labAccount == null) {
                 return Response.status(NOT_FOUND).entity("unregistered user").build();
             }
             // Issue a token for the user
-            String token = JWTokenUtility.buildJWT(phonenumber);
+            String token = JWTokenUtility.buildJWT(username);
 
             // Return the token on the response
             return Response.ok("login successful").header(AUTHORIZATION, "Bearer " + token).build();
@@ -67,81 +107,4 @@ public class LabAccountEndPoint {
         }
     }
 
-    @POST
-    @Path("/signup")
-    @Consumes(APPLICATION_FORM_URLENCODED)
-    public Response create(
-            @FormParam("fullname") String fullname,
-            @FormParam("email") String email,
-            @FormParam("location") String location,
-            @FormParam("region") String region,
-            @FormParam("phonenumber") String phonenumber,
-            @FormParam("pincode") String pincode
-    ) {
-        try {
-            //check for empty inputs
-            if (StringUtils.isNotBlank(fullname) && StringUtils.isNotBlank(email)
-                    && StringUtils.isNotBlank(location) && StringUtils.isNotBlank(region)
-                    && StringUtils.isNotBlank(phonenumber) && StringUtils.isNotBlank(pincode)) {
-            } else {
-                return Response.ok("Please Complete All Fields").build();
-            }
-            boolean dp = checkForDuplicateRegistration(phonenumber);
-            if (dp == true) {
-                return Response.ok("This number is already registered in the system").build();
-            }
-            pincode = PasswordUtils.digestPassword(pincode);
-            Patient patient = new Patient();
-            patient.setFullname(fullname);
-            patient.setEmail(email);
-            patient.setLocation(location);
-            patient.setRegion(region);
-            patient.setPhonenumber(phonenumber);
-            patient.setPincode(pincode);
-            patient.setDeleted("NO");
-
-            String pId = patientBean.patientCreate(patient);
-            if (pId == null) {
-                return Response.ok("UNABLE TO CREATE USER").build();
-            }
-            return Response.ok(pId).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Path("/pending")
-    @POST
-    @Consumes(APPLICATION_FORM_URLENCODED)
-    @JWTTokenNeeded
-    public Response pendingResults(@Context SecurityContext securityContext) {
-        try {
-            Principal principal = securityContext.getUserPrincipal();
-            String phonenumber = principal.getName();
-            List<LabSession> pendingSessionList = labSessionBean.labSessionGetAll(false);
-            GenericEntity<List<LabSession>> pendingSession = new GenericEntity<List<LabSession>>(pendingSessionList) {
-            };
-            if (pendingSessionList == null) {
-                System.out.println("nothkin heeeee");
-                return Response.ok("empty results").build();
-            } else {
-                System.out.println("sometinn heerrr");
-                return Response.ok(pendingSession).build();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private boolean checkForDuplicateRegistration(String phonenumber) {
-        List<Patient> ps = patientBean.patientFindByAttribute("phonenumber", phonenumber, false);
-        if (!(ps.isEmpty())) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-}
+ }

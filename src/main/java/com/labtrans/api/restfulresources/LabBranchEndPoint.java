@@ -1,13 +1,16 @@
 package com.labtrans.api.restfulresources;
 
+import com.labtrans.ejb.entities.LabBranch;
 import com.labtrans.ejb.entities.LabSession;
 import com.labtrans.ejb.entities.Patient;
+import com.labtrans.ejb.sessionbean.LabBranchBean;
 import com.labtrans.ejb.sessionbean.LabSessionBean;
 import com.labtrans.ejb.sessionbean.PatientBean;
 import com.labtrans.jwtfilter.JWTTokenNeeded;
 import com.labtrans.util.JWTokenUtility;
 import com.labtrans.util.PasswordUtils;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -30,7 +33,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author Adm_Kjo
  */
-@Path("/patient")
+@Path("/labbranch")
 @Produces(APPLICATION_JSON)
 @Consumes(APPLICATION_JSON)
 @Transactional
@@ -38,106 +41,53 @@ import org.apache.commons.lang3.StringUtils;
 public class LabBranchEndPoint {
 
     @EJB
-    private PatientBean patientBean;
-    @EJB
-    private LabSessionBean labSessionBean;
-    private static final Logger LOGGER = Logger.getLogger(PatientBean.class.getName());
+    private LabBranchBean labBranchBean;
+    private static final Logger LOGGER = Logger.getLogger(LabBranchEndPoint.class.getName());
 
     @POST
-    @Path("/login")
-    @Consumes(APPLICATION_FORM_URLENCODED)
-    public Response authenticateUser(
-            @FormParam("phonenumber") String phonenumber,
-            @FormParam("pincode") String pincode) {
-        try {
-            LOGGER.info("#### login/password : " + phonenumber + "/" + pincode);
-            // Authenticate the user using the credentials provided
-            Patient patient = patientBean.patientLogin(phonenumber, pincode);
-            if (patient == null) {
-                return Response.status(NOT_FOUND).entity("unregistered user").build();
-            }
-            // Issue a token for the user
-            String token = JWTokenUtility.buildJWT(phonenumber);
-
-            // Return the token on the response
-            return Response.ok("login successful").header(AUTHORIZATION, "Bearer " + token).build();
-
-        } catch (Exception e) {
-            return Response.status(UNAUTHORIZED).entity("login failed").build();
-        }
-    }
-
-    @POST
-    @Path("/signup")
+    @Path("/createbranch")
     @Consumes(APPLICATION_FORM_URLENCODED)
     public Response create(
-            @FormParam("fullname") String fullname,
+            @FormParam("branchName") String branchName,
+            @FormParam("contact") String contact,
             @FormParam("email") String email,
-            @FormParam("location") String location,
-            @FormParam("region") String region,
-            @FormParam("phonenumber") String phonenumber,
-            @FormParam("pincode") String pincode
+            @FormParam("labcode") String labcode
     ) {
         try {
             //check for empty inputs
-            if (StringUtils.isNotBlank(fullname) && StringUtils.isNotBlank(email)
-                    && StringUtils.isNotBlank(location) && StringUtils.isNotBlank(region)
-                    && StringUtils.isNotBlank(phonenumber) && StringUtils.isNotBlank(pincode)) {
+            if (StringUtils.isNotBlank(branchName) && StringUtils.isNotBlank(contact)
+                    && StringUtils.isNotBlank(email) && StringUtils.isNotBlank(labcode)) {
             } else {
                 return Response.ok("Please Complete All Fields").build();
             }
-            boolean dp = checkForDuplicateRegistration(phonenumber);
+            boolean dp = checkForDuplicateRegistration(contact);
             if (dp == true) {
-                return Response.ok("This number is already registered in the system").build();
+                return Response.ok("This Lab is already registered in the system").build();
             }
-            pincode = PasswordUtils.digestPassword(pincode);
-            Patient patient = new Patient();
-            patient.setFullname(fullname);
-            patient.setEmail(email);
-            patient.setLocation(location);
-            patient.setRegion(region);
-            patient.setPhonenumber(phonenumber);
-            patient.setPincode(pincode);
-            patient.setDeleted("NO");
+            String branchCode = "LAB-" + branchName + new Date().toString();
+            LabBranch labBranch = new LabBranch();
+            labBranch.setBranchCode(branchCode);
+            labBranch.setLabcode(labcode);
+            labBranch.setBranchName(branchName);
+            labBranch.setContact(contact);
+            labBranch.setEmail(email);
+            labBranch.setDeleted("NO");
+            labBranch.setDateCreated(new Date());
 
-            String pId = patientBean.patientCreate(patient);
-            if (pId == null) {
-                return Response.ok("UNABLE TO CREATE USER").build();
+            String brId = labBranchBean.labBranchCreate(labBranch);
+            if (brId == null) {
+                return Response.ok("UNABLE TO CREATE ACCOUNT").build();
             }
-            return Response.ok(pId).build();
+            return Response.ok(brId).build();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    @Path("/pending")
-    @POST
-    @Consumes(APPLICATION_FORM_URLENCODED)
-    @JWTTokenNeeded
-    public Response pendingResults(@Context SecurityContext securityContext) {
-        try {
-            Principal principal = securityContext.getUserPrincipal();
-            String phonenumber = principal.getName();
-            List<LabSession> pendingSessionList = labSessionBean.labSessionGetAll(false);
-            GenericEntity<List<LabSession>> pendingSession = new GenericEntity<List<LabSession>>(pendingSessionList) {
-            };
-            if (pendingSessionList == null) {
-                System.out.println("nothkin heeeee");
-                return Response.ok("empty results").build();
-            } else {
-                System.out.println("sometinn heerrr");
-                return Response.ok(pendingSession).build();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private boolean checkForDuplicateRegistration(String phonenumber) {
-        List<Patient> ps = patientBean.patientFindByAttribute("phonenumber", phonenumber, false);
-        if (!(ps.isEmpty())) {
+    private boolean checkForDuplicateRegistration(String contact) {
+        List<LabBranch> lb = labBranchBean.labBranchFindByAttribute(contact, "contact", false);
+        if (!(lb.isEmpty())) {
             return true;
         } else {
             return false;

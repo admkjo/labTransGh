@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -33,9 +35,8 @@ public class DoctorPatientCirle implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
     @Column(name = "col_circle_id")
     private String circleId;
     @Basic(optional = false)
@@ -133,7 +134,6 @@ public class DoctorPatientCirle implements Serializable {
         this.deleted = deleted;
     }
 
-   
     @Override
     public int hashCode() {
         int hash = 0;
@@ -158,5 +158,5 @@ public class DoctorPatientCirle implements Serializable {
     public String toString() {
         return "com.labtrans.ejb.entities.DoctorPatientCirle[ colCircleId=" + circleId + " ]";
     }
-    
+
 }

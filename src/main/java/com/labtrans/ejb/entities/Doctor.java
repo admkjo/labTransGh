@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,8 +36,7 @@ public class Doctor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "col_doc_id")
     private String docId;
     @Basic(optional = false)
@@ -169,8 +170,6 @@ public class Doctor implements Serializable {
     public void setDeleted(String deleted) {
         this.deleted = deleted;
     }
-    
-    
 
     public Doctor() {
     }
@@ -183,7 +182,6 @@ public class Doctor implements Serializable {
         this.docId = docId;
         this.docCode = docCode;
     }
-
 
     @Override
     public int hashCode() {
@@ -209,5 +207,5 @@ public class Doctor implements Serializable {
     public String toString() {
         return "com.labtrans.ejb.entities.Doctor[ docId=" + docId + " ]";
     }
-    
+
 }
