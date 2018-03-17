@@ -50,6 +50,15 @@ public class LabSession implements Serializable {
     @Size(max = 10)
     @Column(name = "col_notify_patient")
     private String notifyPatient;
+    @Size(max = 10)
+    @Column(name = "col_send_to_patient_status")
+    private String sendToPatientStatus;
+    @Size(max = 10)
+    @Column(name = "col_send_to_doc_status")
+    private String sendToDocStatus;
+    @Size(max = 10)
+    @Column(name = "col_payment_status")
+    private String paymentStatus;
     @Size(max = 255)
     @Column(name = "col_doctor")
     private String doctor;
@@ -60,8 +69,8 @@ public class LabSession implements Serializable {
     @Column(name = "col_deleted")
     private String deleted;
     @Size(max = 45)
-    @Column(name = "col_status")
-    private String status;
+    @Column(name = "col_completion_status")
+    private String completionStatus;
 
     public LabSession() {
     }
@@ -130,14 +139,37 @@ public class LabSession implements Serializable {
         this.deleted = deleted;
     }
 
-    public String getStatus() {
-        return status;
+    public String getSendToPatientStatus() {
+        return sendToPatientStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSendToPatientStatus(String sendToPatientStatus) {
+        this.sendToPatientStatus = sendToPatientStatus;
     }
 
+    public String getSendToDocStatus() {
+        return sendToDocStatus;
+    }
+
+    public void setSendToDocStatus(String sendToDocStatus) {
+        this.sendToDocStatus = sendToDocStatus;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public String getCompletionStatus() {
+        return completionStatus;
+    }
+
+    public void setCompletionStatus(String completionStatus) {
+        this.completionStatus = completionStatus;
+    }
 
     @Override
     public int hashCode() {
@@ -163,5 +195,5 @@ public class LabSession implements Serializable {
     public String toString() {
         return "com.labtrans.ejb.entities.LabSession[ labSessionId=" + labSessionId + " ]";
     }
-    
+
 }

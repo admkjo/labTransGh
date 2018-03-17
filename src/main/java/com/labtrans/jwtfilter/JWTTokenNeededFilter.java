@@ -24,9 +24,14 @@ public class JWTTokenNeededFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         System.out.println("request filter invoked...");
-        
+
         String authHeaderVal = requestContext.getHeaderString("Authorization");
-        
+        if (authHeaderVal == null) {
+            System.out.println(".......authHeaderVal is empty");
+            requestContext.setProperty("auth-failed", true);
+            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("Token unavailable").build());
+            return;
+        }
 
         //consume JWT i.e. execute signature validation
         if (authHeaderVal.startsWith("Bearer")) {

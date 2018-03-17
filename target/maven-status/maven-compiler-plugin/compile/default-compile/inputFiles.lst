@@ -1,4 +1,5 @@
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\Patient.java
+C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\Doctor.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\util\LoggerProducer.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\api\restfulresources\PatientEndPoint.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\LabResults.java
@@ -14,9 +15,9 @@ C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtran
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\jwtfilter\JWTTokenNeededFilter.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\LabAccount.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\Test.java
+C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\sessionbean\LabSessionBean.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\LabStaff.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\LabSession.java
-C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\Doctors.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\TestParams.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\sessionbean\PatientBean.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\util\JWTokenUtility.java

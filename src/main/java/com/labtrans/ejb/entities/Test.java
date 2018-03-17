@@ -38,94 +38,94 @@ public class Test implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "col_test_id")
-    private String colTestId;
+    private String testId;
     @Size(max = 255)
     @Column(name = "col_test_code")
-    private String colTestCode;
+    private String testCode;
     @Size(max = 255)
     @Column(name = "col_test_name")
-    private String colTestName;
+    private String testName;
     @Lob
     @Size(max = 65535)
     @Column(name = "col_test_description")
-    private String colTestDescription;
+    private String testDescription;
     @Size(max = 255)
     @Column(name = "col_created_by")
-    private String colCreatedBy;
+    private String createdBy;
     @Column(name = "col_date_created")
     @Temporal(TemporalType.DATE)
-    private Date colDateCreated;
+    private Date dateCreated;
     @Size(max = 10)
     @Column(name = "col_deleted")
-    private String colDeleted;
+    private String deleted;
 
     public Test() {
     }
 
-    public Test(String colTestId) {
-        this.colTestId = colTestId;
+    public Test(String testId) {
+        this.testId = testId;
     }
 
-    public String getColTestId() {
-        return colTestId;
+    public String getTestId() {
+        return testId;
     }
 
-    public void setColTestId(String colTestId) {
-        this.colTestId = colTestId;
+    public void setTestId(String testId) {
+        this.testId = testId;
     }
 
-    public String getColTestCode() {
-        return colTestCode;
+    public String getTestCode() {
+        return testCode;
     }
 
-    public void setColTestCode(String colTestCode) {
-        this.colTestCode = colTestCode;
+    public void setTestCode(String testCode) {
+        this.testCode = testCode;
     }
 
-    public String getColTestName() {
-        return colTestName;
+    public String getTestName() {
+        return testName;
     }
 
-    public void setColTestName(String colTestName) {
-        this.colTestName = colTestName;
+    public void setTestName(String testName) {
+        this.testName = testName;
     }
 
-    public String getColTestDescription() {
-        return colTestDescription;
+    public String getTestDescription() {
+        return testDescription;
     }
 
-    public void setColTestDescription(String colTestDescription) {
-        this.colTestDescription = colTestDescription;
+    public void setTestDescription(String testDescription) {
+        this.testDescription = testDescription;
     }
 
-    public String getColCreatedBy() {
-        return colCreatedBy;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setColCreatedBy(String colCreatedBy) {
-        this.colCreatedBy = colCreatedBy;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
-    public Date getColDateCreated() {
-        return colDateCreated;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setColDateCreated(Date colDateCreated) {
-        this.colDateCreated = colDateCreated;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public String getColDeleted() {
-        return colDeleted;
+    public String getDeleted() {
+        return deleted;
     }
 
-    public void setColDeleted(String colDeleted) {
-        this.colDeleted = colDeleted;
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (colTestId != null ? colTestId.hashCode() : 0);
+        hash += (testId != null ? testId.hashCode() : 0);
         return hash;
     }
 
@@ -136,7 +136,7 @@ public class Test implements Serializable {
             return false;
         }
         Test other = (Test) object;
-        if ((this.colTestId == null && other.colTestId != null) || (this.colTestId != null && !this.colTestId.equals(other.colTestId))) {
+        if ((this.testId == null && other.testId != null) || (this.testId != null && !this.testId.equals(other.testId))) {
             return false;
         }
         return true;
@@ -144,7 +144,7 @@ public class Test implements Serializable {
 
     @Override
     public String toString() {
-        return "com.labtrans.ejb.entities.Test[ colTestId=" + colTestId + " ]";
+        return "com.labtrans.ejb.entities.Test[ testId=" + testId + " ]";
     }
-    
+
 }

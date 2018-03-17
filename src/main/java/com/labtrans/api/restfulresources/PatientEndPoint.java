@@ -7,6 +7,7 @@ import com.labtrans.ejb.sessionbean.PatientBean;
 import com.labtrans.jwtfilter.JWTTokenNeeded;
 import com.labtrans.util.JWTokenUtility;
 import com.labtrans.util.PasswordUtils;
+import java.security.Principal;
 import java.util.List;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.core.GenericEntity;
 
 import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
 import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
@@ -112,18 +114,26 @@ public class PatientEndPoint {
     @Path("/pending")
     @POST
     @Consumes(APPLICATION_FORM_URLENCODED)
-    public Response pendingResults(@FormParam("phone") String fullname) {
+    @JWTTokenNeeded
+    public Response pendingResults(@Context SecurityContext securityContext) {
         try {
-            List<LabSession> pendingSession = labSessionBean.labSessionFindByAttribute(fullname, patientBean, false);
-            if(){
-                return ;
+            Principal principal = securityContext.getUserPrincipal();
+            String phonenumber = principal.getName();
+            List<LabSession> pendingSessionList = labSessionBean.labSessionGetAll(false);
+            GenericEntity<List<LabSession>> pendingSession = new GenericEntity<List<LabSession>>(pendingSessionList) {
+            };
+            if (pendingSessionList == null) {
+                System.out.println("nothkin heeeee");
+                return Response.ok("empty results").build();
+            } else {
+                System.out.println("sometinn heerrr");
+                return Response.ok(pendingSession).build();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-   
 
     private boolean checkForDuplicateRegistration(String phonenumber) {
         List<Patient> ps = patientBean.patientFindByAttribute("phonenumber", phonenumber, false);
@@ -134,6 +144,4 @@ public class PatientEndPoint {
         }
 
     }
-
-//    @GET
 }

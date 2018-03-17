@@ -2,7 +2,6 @@ com\labtrans\jwtfilter\JWTTokenNeeded.class
 com\labtrans\ejb\entities\LabBranchPatients_.class
 com\labtrans\util\LoggerProducer.class
 com\labtrans\jwtfilter\JWTTokenNeededFilter.class
-com\labtrans\ejb\entities\Doctors.class
 com\labtrans\jwtfilter\JWTTokenNeededFilter$1.class
 com\labtrans\util\RsaKeyGenerator.class
 com\labtrans\ejb\entities\LabBranchPatients.class
@@ -19,10 +18,12 @@ com\labtrans\jwtfilter\JWTTokenNeededFilter$1$1.class
 com\labtrans\ejb\entities\SessionTests.class
 com\labtrans\ejb\sessionbean\PatientBean.class
 com\labtrans\ejb\entities\LabStaff.class
+com\labtrans\ejb\entities\Doctor.class
 com\labtrans\ejb\entities\SessionTests_.class
+com\labtrans\ejb\sessionbean\LabSessionBean.class
 com\labtrans\ejb\entities\Test_.class
+com\labtrans\ejb\entities\Doctor_.class
 com\labtrans\ejb\entities\DoctorPatientCirle_.class
-com\labtrans\ejb\entities\Doctors_.class
 com\labtrans\ejb\entities\LabResults_.class
 com\labtrans\ejb\entities\Patient.class
 com\labtrans\ejb\entities\LabBranch.class

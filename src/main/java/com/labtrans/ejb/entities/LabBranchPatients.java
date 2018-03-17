@@ -60,6 +60,64 @@ public class LabBranchPatients implements Serializable {
     public LabBranchPatients() {
     }
 
+    public String getLabBranchId() {
+        return labBranchId;
+    }
+
+    public void setLabBranchId(String labBranchId) {
+        this.labBranchId = labBranchId;
+    }
+
+    public String getLabBranchCode() {
+        return labBranchCode;
+    }
+
+    public void setLabBranchCode(String labBranchCode) {
+        this.labBranchCode = labBranchCode;
+    }
+
+    public String getLabcode() {
+        return labcode;
+    }
+
+    public void setLabcode(String labcode) {
+        this.labcode = labcode;
+    }
+
+    public String getBranchCode() {
+        return branchCode;
+    }
+
+    public void setBranchCode(String branchCode) {
+        this.branchCode = branchCode;
+    }
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public String getDeletedNo() {
+        return deletedNo;
+    }
+
+    public void setDeletedNo(String deletedNo) {
+        this.deletedNo = deletedNo;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
