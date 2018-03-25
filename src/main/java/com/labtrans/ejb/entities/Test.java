@@ -6,6 +6,7 @@
 package com.labtrans.ejb.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,10 +17,10 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -59,6 +60,12 @@ public class Test implements Serializable {
     @Size(max = 10)
     @Column(name = "col_deleted")
     private String deleted;
+
+    @OneToMany(mappedBy = "testId")
+    private Collection<SessionTests> sessionTestsCollection;
+    @OneToMany(mappedBy = "testId")
+    private Collection<TestParams> testParamsCollection;
+    
 
     public Test() {
     }
@@ -122,6 +129,24 @@ public class Test implements Serializable {
     public void setDeleted(String deleted) {
         this.deleted = deleted;
     }
+
+    public Collection<SessionTests> getSessionTestsCollection() {
+        return sessionTestsCollection;
+    }
+
+    public void setSessionTestsCollection(Collection<SessionTests> sessionTestsCollection) {
+        this.sessionTestsCollection = sessionTestsCollection;
+    }
+
+    public Collection<TestParams> getTestParamsCollection() {
+        return testParamsCollection;
+    }
+
+    public void setTestParamsCollection(Collection<TestParams> testParamsCollection) {
+        this.testParamsCollection = testParamsCollection;
+    }
+       
+    
 
     @Override
     public int hashCode() {

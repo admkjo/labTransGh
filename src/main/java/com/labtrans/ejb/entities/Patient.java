@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -59,6 +60,9 @@ public class Patient implements Serializable {
     @Size(max = 45)
     @Column(name = "col_deleted")
     private String deleted;
+
+    @OneToOne(mappedBy = "patientId")
+    private LabAccount labAccount;
 
     public Patient() {
     }
@@ -136,7 +140,14 @@ public class Patient implements Serializable {
         this.deleted = deleted;
     }
 
-   
+    public LabAccount getLabAccount() {
+        return labAccount;
+    }
+
+    public void setLabAccount(LabAccount labAccount) {
+        this.labAccount = labAccount;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -161,5 +172,5 @@ public class Patient implements Serializable {
     public String toString() {
         return "com.labtrans.ejb.entities.Patients[ patientId=" + patientId + " ]";
     }
-    
+
 }

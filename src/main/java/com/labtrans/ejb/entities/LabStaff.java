@@ -13,8 +13,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,9 +48,6 @@ public class LabStaff implements Serializable {
     @Column(name = "col_labcode")
     private String labcode;
     @Size(max = 45)
-    @Column(name = "col_branch_code")
-    private String branchCode;
-    @Size(max = 45)
     @Column(name = "col_fullname")
     private String fullname;
     @Size(max = 45)
@@ -68,6 +68,13 @@ public class LabStaff implements Serializable {
     @Size(max = 45)
     @Column(name = "col_deleted")
     private String deleted;
+
+    @OneToOne(mappedBy = "labStaff")
+    private LabSession labSession;
+
+    @ManyToOne
+    @JoinColumn(name = "col_branch_code")
+    private LabBranch labBranch;
 
     public LabStaff() {
     }
@@ -94,14 +101,6 @@ public class LabStaff implements Serializable {
 
     public void setLabcode(String labcode) {
         this.labcode = labcode;
-    }
-
-    public String getBranchCode() {
-        return branchCode;
-    }
-
-    public void setBranchCode(String branchCode) {
-        this.branchCode = branchCode;
     }
 
     public String getFullname() {
@@ -158,6 +157,22 @@ public class LabStaff implements Serializable {
 
     public void setDeleted(String deleted) {
         this.deleted = deleted;
+    }
+
+    public LabSession getLabSession() {
+        return labSession;
+    }
+
+    public void setLabSession(LabSession labSession) {
+        this.labSession = labSession;
+    }
+
+    public LabBranch getLabBranch() {
+        return labBranch;
+    }
+
+    public void setLabBranch(LabBranch labBranch) {
+        this.labBranch = labBranch;
     }
 
     @Override

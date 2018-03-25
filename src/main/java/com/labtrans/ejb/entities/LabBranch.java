@@ -6,6 +6,7 @@
 package com.labtrans.ejb.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,8 +14,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -66,6 +70,13 @@ public class LabBranch implements Serializable {
     @Size(max = 45)
     @Column(name = "col_deleted")
     private String deleted;
+    @OneToMany(mappedBy = "labBranch")
+    private Collection<LabSession> labSessionCollection;
+    @OneToMany(mappedBy = "labBranch")
+    private Collection<LabStaff> labStaffCollection;
+    @ManyToOne
+    @JoinColumn(name = "col_lab_account")
+    private LabAccount labAccount;
 
     public LabBranch() {
     }
@@ -143,6 +154,30 @@ public class LabBranch implements Serializable {
 
     public void setDeleted(String deleted) {
         this.deleted = deleted;
+    }
+
+    public LabAccount getLabAccount() {
+        return labAccount;
+    }
+
+    public void setLabAccount(LabAccount labAccount) {
+        this.labAccount = labAccount;
+    }
+
+    public Collection<LabSession> getLabSessionCollection() {
+        return labSessionCollection;
+    }
+
+    public void setLabSessionCollection(Collection<LabSession> labSessionCollection) {
+        this.labSessionCollection = labSessionCollection;
+    }
+
+    public Collection<LabStaff> getLabStaffCollection() {
+        return labStaffCollection;
+    }
+
+    public void setLabStaffCollection(Collection<LabStaff> labStaffCollection) {
+        this.labStaffCollection = labStaffCollection;
     }
 
     @Override

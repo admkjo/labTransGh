@@ -6,16 +6,19 @@
 package com.labtrans.ejb.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -37,14 +40,17 @@ public class TestParams implements Serializable {
     @Column(name = "col_test_param_id")
     private String testParamId;
     @Size(max = 255)
-    @Column(name = "col_test_id")
-    private String testId;
+    @ManyToMany
+    @JoinColumn(name = "col_test_id")
+    private Test testId;
     @Size(max = 255)
     @Column(name = "col_parameter")
     private String parameter;
     @Size(max = 45)
     @Column(name = "col_deleted")
     private String deleted;
+    @OneToMany(mappedBy = "testParam")
+    private Collection<TestParamDefaultValues> TestcoluParamDefaultValuesCollection;
 
     public TestParams() {
     }
@@ -57,11 +63,11 @@ public class TestParams implements Serializable {
         return testParamId;
     }
 
-    public String getTestId() {
+    public Test getTestId() {
         return testId;
     }
 
-    public void setTestId(String testId) {
+    public void setTestId(Test testId) {
         this.testId = testId;
     }
 
@@ -81,6 +87,13 @@ public class TestParams implements Serializable {
         this.deleted = deleted;
     }
 
+    public Collection<TestParamDefaultValues> getTestcoluParamDefaultValuesCollection() {
+        return TestcoluParamDefaultValuesCollection;
+    }
+
+    public void setTestcoluParamDefaultValuesCollection(Collection<TestParamDefaultValues> TestcoluParamDefaultValuesCollection) {
+        this.TestcoluParamDefaultValuesCollection = TestcoluParamDefaultValuesCollection;
+    }
 
     @Override
     public int hashCode() {
@@ -106,5 +119,5 @@ public class TestParams implements Serializable {
     public String toString() {
         return "com.labtrans.ejb.entities.TestParams[ testParamId=" + testParamId + " ]";
     }
-    
+
 }

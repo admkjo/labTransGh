@@ -12,10 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -36,12 +37,9 @@ public class TestParamDefaultValues implements Serializable {
     @Basic(optional = false)
     @Column(name = "col_test_param_default_values_id")
     private Integer testParamDefaultValuesId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "col_test_id")
-    private int testId;
-    @Column(name = "col_test_param")
-    private Integer testParam;
+    @ManyToOne
+    @JoinColumn(name = "col_test_param")
+    private TestParams testParam;
     @Size(max = 255)
     @Column(name = "col_value")
     private String value;
@@ -58,7 +56,6 @@ public class TestParamDefaultValues implements Serializable {
 
     public TestParamDefaultValues(Integer testParamDefaultValuesId, int testId) {
         this.testParamDefaultValuesId = testParamDefaultValuesId;
-        this.testId = testId;
     }
 
     public Integer getTestParamDefaultValuesId() {
@@ -69,19 +66,11 @@ public class TestParamDefaultValues implements Serializable {
         this.testParamDefaultValuesId = testParamDefaultValuesId;
     }
 
-    public int getTestId() {
-        return testId;
-    }
-
-    public void setTestId(int testId) {
-        this.testId = testId;
-    }
-
-    public Integer getTestParam() {
+    public TestParams getTestParam() {
         return testParam;
     }
 
-    public void setTestParam(Integer testParam) {
+    public void setTestParam(TestParams testParam) {
         this.testParam = testParam;
     }
 

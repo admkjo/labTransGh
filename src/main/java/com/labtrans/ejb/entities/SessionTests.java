@@ -12,10 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -36,12 +37,13 @@ public class SessionTests implements Serializable {
     @Basic(optional = false)
     @Column(name = "col_session_test_id")
     private String sessionTestId;
+    @ManyToOne
+    @JoinColumn(name = "col_lab_session")
+    private LabSession labSession;
     @Size(max = 255)
-    @Column(name = "col_lab_session")
-    private String labSession;
-    @Size(max = 255)
-    @Column(name = "test_id")
-    private String testId;
+    @ManyToOne
+    @JoinColumn(name = "col_test_id")
+    private Test testId;
 
     public SessionTests() {
     }
@@ -58,19 +60,19 @@ public class SessionTests implements Serializable {
         this.sessionTestId = sessionTestId;
     }
 
-    public String getLabSession() {
+    public LabSession getLabSession() {
         return labSession;
     }
 
-    public void setLabSession(String labSession) {
+    public void setLabSession(LabSession labSession) {
         this.labSession = labSession;
     }
 
-    public String getTestId() {
+    public Test getTestId() {
         return testId;
     }
 
-    public void setTestId(String testId) {
+    public void setTestId(Test testId) {
         this.testId = testId;
     }
 
@@ -98,5 +100,5 @@ public class SessionTests implements Serializable {
     public String toString() {
         return "com.labtrans.ejb.entities.SessionTests[ sessionTestId=" + sessionTestId + " ]";
     }
-    
+
 }

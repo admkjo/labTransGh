@@ -12,7 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -40,8 +42,9 @@ public class LabResults implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "col_lab_session")
-    private String labSession;
+    @ManyToOne
+    @JoinColumn(name = "col_lab_session")
+    private LabSession labSession;
     @Size(max = 255)
     @Column(name = "col_test_param_name")
     private String testParamName;
@@ -57,7 +60,7 @@ public class LabResults implements Serializable {
         this.labResultsId = labResultsId;
     }
 
-    public LabResults(String labResultsId, String labSession) {
+    public LabResults(String labResultsId, LabSession labSession) {
         this.labResultsId = labResultsId;
         this.labSession = labSession;
     }
@@ -70,11 +73,11 @@ public class LabResults implements Serializable {
         this.labResultsId = labResultsId;
     }
 
-    public String getLabSession() {
+    public LabSession getLabSession() {
         return labSession;
     }
 
-    public void setLabSession(String labSession) {
+    public void setLabSession(LabSession labSession) {
         this.labSession = labSession;
     }
 
@@ -118,5 +121,5 @@ public class LabResults implements Serializable {
     public String toString() {
         return "com.labtrans.ejb.entities.LabResults[ labResultsId=" + labResultsId + " ]";
     }
-    
+
 }

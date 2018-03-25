@@ -6,6 +6,7 @@
 package com.labtrans.ejb.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,14 +14,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,15 +44,6 @@ public class LabSession implements Serializable {
     @Basic(optional = false)
     @Column(name = "col_lab_session_id")
     private String labSessionId;
-    @Size(max = 45)
-    @Column(name = "col_branch_code")
-    private String branchCode;
-    @Size(max = 45)
-    @Column(name = "col_patient_id")
-    private String patientId;
-    @Size(max = 45)
-    @Column(name = "col_technician")
-    private String technician;
     @Size(max = 10)
     @Column(name = "col_notify_patient")
     private String notifyPatient;
@@ -61,8 +57,6 @@ public class LabSession implements Serializable {
     @Column(name = "col_payment_status")
     private String paymentStatus;
     @Size(max = 255)
-    @Column(name = "col_doctor")
-    private String doctor;
     @Column(name = "col_date_created")
     @Temporal(TemporalType.DATE)
     private Date dateCreated;
@@ -72,6 +66,22 @@ public class LabSession implements Serializable {
     @Size(max = 45)
     @Column(name = "col_completion_status")
     private String completionStatus;
+    @Size(max = 45)
+    @JoinColumn(name = "col_branch_code", referencedColumnName = "col_branch_code")
+    @ManyToOne
+    private LabBranch labBranch;
+    @Size(max = 45)
+    @OneToOne
+    @JoinColumn(name = "col_patient_id")
+    private Patient patientId;
+    @Size(max = 45)
+    @JoinColumn(name = "col_technician")
+    @OneToOne
+    private LabStaff labStaff;
+    @OneToMany(mappedBy = "LabSession")
+    private Collection<SessionTests> sessionTestsCollection;
+    @OneToMany(mappedBy = "labSession")
+    private Collection<LabResults> labResultsCollection;
 
     public LabSession() {
     }
@@ -84,28 +94,28 @@ public class LabSession implements Serializable {
         this.labSessionId = labSessionId;
     }
 
-    public String getBranchCode() {
-        return branchCode;
+    public LabBranch getLabBranch() {
+        return labBranch;
     }
 
-    public void setBranchCode(String branchCode) {
-        this.branchCode = branchCode;
+    public void setLabBranch(LabBranch labBranch) {
+        this.labBranch = labBranch;
     }
 
-    public String getPatientId() {
+    public Patient getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(String patientId) {
+    public void setPatientId(Patient patientId) {
         this.patientId = patientId;
     }
 
-    public String getTechnician() {
-        return technician;
+    public LabStaff getLabStaff() {
+        return labStaff;
     }
 
-    public void setTechnician(String technician) {
-        this.technician = technician;
+    public void setLabStaff(LabStaff labStaff) {
+        this.labStaff = labStaff;
     }
 
     public String getNotifyPatient() {
@@ -114,14 +124,6 @@ public class LabSession implements Serializable {
 
     public void setNotifyPatient(String notifyPatient) {
         this.notifyPatient = notifyPatient;
-    }
-
-    public String getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(String doctor) {
-        this.doctor = doctor;
     }
 
     public Date getDateCreated() {
@@ -170,6 +172,24 @@ public class LabSession implements Serializable {
 
     public void setCompletionStatus(String completionStatus) {
         this.completionStatus = completionStatus;
+    }
+
+    @XmlTransient
+    public Collection<SessionTests> getSessionTestsCollection() {
+        return sessionTestsCollection;
+    }
+
+    public void setSessionTestsCollection(Collection<SessionTests> sessionTestsCollection) {
+        this.sessionTestsCollection = sessionTestsCollection;
+    }
+
+    @XmlTransient
+    public Collection<LabResults> getLabResultsCollection() {
+        return labResultsCollection;
+    }
+
+    public void setlabResultsCollectionCollection(Collection<LabResults> labResultsCollection) {
+        this.labResultsCollection = labResultsCollection;
     }
 
     @Override
