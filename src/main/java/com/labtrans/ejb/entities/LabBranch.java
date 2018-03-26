@@ -6,8 +6,10 @@
 package com.labtrans.ejb.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -77,6 +81,14 @@ public class LabBranch implements Serializable {
     @ManyToOne
     @JoinColumn(name = "col_lab_account")
     private LabAccount labAccount;
+
+    @ManyToMany
+    @JoinTable(name = "tbl_lab_branch_patients",
+            joinColumns = {
+                @JoinColumn(name = "code_lab_branch_code")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "col_patient_id")})
+    private List<Patient> patients = new ArrayList<Patient>();
 
     public LabBranch() {
     }
@@ -178,6 +190,14 @@ public class LabBranch implements Serializable {
 
     public void setLabStaffCollection(Collection<LabStaff> labStaffCollection) {
         this.labStaffCollection = labStaffCollection;
+    }
+
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
     }
 
     @Override

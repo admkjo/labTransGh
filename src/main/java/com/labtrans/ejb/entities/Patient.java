@@ -6,12 +6,17 @@
 package com.labtrans.ejb.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -63,6 +68,17 @@ public class Patient implements Serializable {
 
     @OneToOne(mappedBy = "patientId")
     private LabAccount labAccount;
+
+    @ManyToMany
+    @JoinTable(name = "tbl_doctor_patient_cirle",
+            joinColumns = {
+                @JoinColumn(name = "col_patient_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "col_doc_id")})
+    private List<Doctor> doctors = new ArrayList<Doctor>();
+
+    @ManyToMany(mappedBy = "patients")
+    private List<LabBranch> labBranches = new ArrayList<LabBranch>();
 
     public Patient() {
     }
@@ -146,6 +162,22 @@ public class Patient implements Serializable {
 
     public void setLabAccount(LabAccount labAccount) {
         this.labAccount = labAccount;
+    }
+
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
+    }
+
+    public List<LabBranch> getLabBranches() {
+        return labBranches;
+    }
+
+    public void setLabBranches(List<LabBranch> labBranches) {
+        this.labBranches = labBranches;
     }
 
     @Override
