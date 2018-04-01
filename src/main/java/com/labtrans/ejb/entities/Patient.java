@@ -66,8 +66,8 @@ public class Patient implements Serializable {
     @Column(name = "col_deleted")
     private String deleted;
 
-    @OneToOne(mappedBy = "patientId")
-    private LabAccount labAccount;
+//    @OneToOne(mappedBy = "patientId")
+//    private LabAccount labAccount;
 
     @ManyToMany
     @JoinTable(name = "tbl_doctor_patient_cirle",
@@ -156,13 +156,13 @@ public class Patient implements Serializable {
         this.deleted = deleted;
     }
 
-    public LabAccount getLabAccount() {
-        return labAccount;
-    }
-
-    public void setLabAccount(LabAccount labAccount) {
-        this.labAccount = labAccount;
-    }
+//    public LabAccount getLabAccount() {
+//        return labAccount;
+//    }
+//
+//    public void setLabAccount(LabAccount labAccount) {
+//        this.labAccount = labAccount;
+//    }
 
     public List<Doctor> getDoctors() {
         return doctors;

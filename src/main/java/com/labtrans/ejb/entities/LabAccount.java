@@ -54,6 +54,12 @@ public class LabAccount implements Serializable {
     @Size(max = 45)
     @Column(name = "col_location")
     private String location;
+    @Size(max = 50)
+    @Column(name = "col_verify_code")
+    private String verifyCode;
+    @Size(max = 50)
+    @Column(name = "col_email")
+    private String email;
     @Size(max = 45)
     @Column(name = "col_region")
     private String region;
@@ -66,7 +72,6 @@ public class LabAccount implements Serializable {
     @Size(max = 45)
     @Column(name = "col_password")
     private String password;
-    @Size(max = 45)
     @Column(name = "col_date_created")
     @Temporal(TemporalType.DATE)
     private Date dateCreated;
@@ -175,6 +180,22 @@ public class LabAccount implements Serializable {
 
     public void setLabBranchCollection(Collection<LabBranch> labBranchCollection) {
         this.labBranchCollection = labBranchCollection;
+    }
+
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

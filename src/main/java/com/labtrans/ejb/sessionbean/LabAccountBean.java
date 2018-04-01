@@ -5,7 +5,7 @@
  */
 package com.labtrans.ejb.sessionbean;
 
-import com.labtrans.ejb.entities.LabAccount ;
+import com.labtrans.ejb.entities.LabAccount;
 import com.labtrans.util.PasswordUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -164,6 +164,26 @@ public class LabAccountBean {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean labAccountValidateCode(String username, String code) {
+        String qryString = "";
+        LabAccount labAccount;
+        try {
+            qryString = " SELECT l FROM LabAccount l where l.username =:username and l.code=:code";
+            TypedQuery<LabAccount> query = em.createQuery(qryString, LabAccount.class);
+            query.setParameter("username", username);
+            query.setParameter("code", code);
+            labAccount = query.getSingleResult();
+            if (labAccount == null) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public Long labAccountCount(boolean includeLogicallyDeleted) {

@@ -39,8 +39,6 @@ public class LabResults implements Serializable {
     @Basic(optional = false)
     @Column(name = "col_lab_results_id")
     private String labResultsId;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 255)
     @ManyToOne
     @JoinColumn(name = "col_lab_session")

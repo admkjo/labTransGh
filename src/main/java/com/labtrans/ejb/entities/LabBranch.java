@@ -74,6 +74,12 @@ public class LabBranch implements Serializable {
     @Size(max = 45)
     @Column(name = "col_deleted")
     private String deleted;
+    @Size(max = 45)
+    @Column(name = "col_location")
+    private String location;
+    @Size(max = 45)
+    @Column(name = "col_region")
+    private String region;
     @OneToMany(mappedBy = "labBranch")
     private Collection<LabSession> labSessionCollection;
     @OneToMany(mappedBy = "labBranch")
@@ -198,6 +204,22 @@ public class LabBranch implements Serializable {
 
     public void setPatients(List<Patient> patients) {
         this.patients = patients;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     @Override

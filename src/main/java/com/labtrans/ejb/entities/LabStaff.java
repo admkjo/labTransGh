@@ -6,6 +6,7 @@
 package com.labtrans.ejb.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -45,8 +47,8 @@ public class LabStaff implements Serializable {
     @Column(name = "col_user_code")
     private String userCode;
     @Size(max = 45)
-    @Column(name = "col_labcode")
-    private String labcode;
+    @Column(name = "col_status")
+    private String status;
     @Size(max = 45)
     @Column(name = "col_fullname")
     private String fullname;
@@ -69,8 +71,8 @@ public class LabStaff implements Serializable {
     @Column(name = "col_deleted")
     private String deleted;
 
-    @OneToOne(mappedBy = "labStaff")
-    private LabSession labSession;
+    @OneToMany(mappedBy = "labStaff")
+    private Collection<LabSession> labSessionCollection;
 
     @ManyToOne
     @JoinColumn(name = "col_branch_code")
@@ -95,12 +97,12 @@ public class LabStaff implements Serializable {
         this.userCode = userCode;
     }
 
-    public String getLabcode() {
-        return labcode;
+    public String getStatus() {
+        return status;
     }
 
-    public void setLabcode(String labcode) {
-        this.labcode = labcode;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getFullname() {
@@ -159,12 +161,12 @@ public class LabStaff implements Serializable {
         this.deleted = deleted;
     }
 
-    public LabSession getLabSession() {
-        return labSession;
+    public Collection<LabSession> getLabSessionCollection() {
+        return labSessionCollection;
     }
 
-    public void setLabSession(LabSession labSession) {
-        this.labSession = labSession;
+    public void setLabSessionCollection(Collection<LabSession> labSessionCollection) {
+        this.labSessionCollection = labSessionCollection;
     }
 
     public LabBranch getLabBranch() {

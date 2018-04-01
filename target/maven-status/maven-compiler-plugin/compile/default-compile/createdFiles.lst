@@ -11,6 +11,7 @@ com\labtrans\ejb\sessionbean\SessionTestsBean.class
 com\labtrans\ejb\entities\LabAccount_.class
 com\labtrans\api\restfulresources\PatientEndPoint.class
 com\labtrans\util\JWTokenUtility.class
+com\labtrans\util\RandomStringGenerator.class
 com\labtrans\ejb\entities\LabStaff.class
 com\labtrans\ejb\entities\Doctor.class
 com\labtrans\api\restfulresources\DoctorPatientCircleEndPoint.class
@@ -27,6 +28,7 @@ com\labtrans\ejb\sessionbean\LabResultsBean.class
 com\labtrans\api\restfulresources\LabResultsEndPoint.class
 com\labtrans\ejb\entities\LabBranchPatients_.class
 com\labtrans\api\restfulresources\LabAccountEndPoint.class
+com\labtrans\api\restfulresources\PatientEndPoint$2.class
 com\labtrans\jwtfilter\JWTTokenNeededFilter$1.class
 com\labtrans\util\RsaKeyGenerator.class
 com\labtrans\ejb\entities\LabBranch_.class
@@ -34,6 +36,7 @@ com\labtrans\ejb\sessionbean\LabAccountBean.class
 com\labtrans\ejb\entities\LabSession_.class
 com\labtrans\ejb\sessionbean\TestBean.class
 com\labtrans\ejb\entities\TestParamDefaultValues_.class
+com\labtrans\util\EmailSender.class
 com\labtrans\ejb\entities\LabStaff_.class
 com\labtrans\ejb\entities\LabResults.class
 com\labtrans\util\PasswordUtils.class
@@ -56,4 +59,5 @@ com\labtrans\ejb\sessionbean\TestParamsBean.class
 com\labtrans\jwtfilter\JWTResponseFilter.class
 com\labtrans\api\restfulresources\LabBranchEndPoint.class
 com\labtrans\ejb\entities\Test.class
+com\labtrans\util\SmsUtil.class
 com\labtrans\ejb\entities\LabAccount.class

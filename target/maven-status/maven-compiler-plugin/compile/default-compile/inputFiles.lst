@@ -2,6 +2,7 @@ C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtran
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\Doctor.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\util\LoggerProducer.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\api\restfulresources\LabBranchEndPoint.java
+C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\util\EmailSender.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\sessionbean\LabStaffBean.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\sessionbean\LabAccountBean.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\sessionbean\TestParamsBean.java
@@ -10,6 +11,7 @@ C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtran
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\sessionbean\TestBean.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\jwtfilter\JWTResponseFilter.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\LabBranchPatients.java
+C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\util\SmsUtil.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\Test.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\sessionbean\LabSessionBean.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\LabStaff.java
@@ -19,6 +21,7 @@ C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtran
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\api\restfulresources\PatientEndPoint.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\LabResults.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\sessionbean\LabBranchPatientsBean.java
+C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\util\RandomStringGenerator.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\api\restfulresources\ApplicationConfig.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\api\restfulresources\LabStaffEndPoint.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\api\restfulresources\TestEndPoint.java

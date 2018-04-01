@@ -60,7 +60,6 @@ public class Test implements Serializable {
     @Size(max = 10)
     @Column(name = "col_deleted")
     private String deleted;
-
     @OneToMany(mappedBy = "testId")
     private Collection<SessionTests> sessionTestsCollection;
     @OneToMany(mappedBy = "testId")

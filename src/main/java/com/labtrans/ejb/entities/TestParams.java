@@ -14,7 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -40,7 +40,7 @@ public class TestParams implements Serializable {
     @Column(name = "col_test_param_id")
     private String testParamId;
     @Size(max = 255)
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "col_test_id")
     private Test testId;
     @Size(max = 255)

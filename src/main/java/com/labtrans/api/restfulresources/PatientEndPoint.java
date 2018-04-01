@@ -135,6 +135,30 @@ public class PatientEndPoint {
         return null;
     }
 
+    @Path("/allresults")
+    @POST
+    @Consumes(APPLICATION_FORM_URLENCODED)
+    @JWTTokenNeeded
+    public Response allResults(@Context SecurityContext securityContext) {
+        try {
+            Principal principal = securityContext.getUserPrincipal();
+            String phonenumber = principal.getName();
+            List<LabSession> pendingSessionList = labSessionBean.labSessionGetAll(false);
+            GenericEntity<List<LabSession>> pendingSession = new GenericEntity<List<LabSession>>(pendingSessionList) {
+            };
+            if (pendingSessionList == null) {
+                System.out.println("nothkin heeeee");
+                return Response.ok("empty results").build();
+            } else {
+                System.out.println("sometinn heerrr");
+                return Response.ok(pendingSession).build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private boolean checkForDuplicateRegistration(String phonenumber) {
         List<Patient> ps = patientBean.patientFindByAttribute("phonenumber", phonenumber, false);
         if (!(ps.isEmpty())) {

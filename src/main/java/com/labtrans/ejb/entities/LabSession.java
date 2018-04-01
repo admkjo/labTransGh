@@ -76,7 +76,7 @@ public class LabSession implements Serializable {
     private Patient patientId;
     @Size(max = 45)
     @JoinColumn(name = "col_technician")
-    @OneToOne
+    @ManyToOne
     private LabStaff labStaff;
     @OneToMany(mappedBy = "LabSession")
     private Collection<SessionTests> sessionTestsCollection;
