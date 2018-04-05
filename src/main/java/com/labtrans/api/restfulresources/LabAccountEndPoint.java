@@ -137,19 +137,16 @@ public class LabAccountEndPoint {
             }
 
             Test test = new Test();
-            labStaff.setDateCreated(new Date());
-            labStaff.setDeleted("NO");
-            labStaff.setEmail(email);
-            labStaff.setFullname(fullname);
-            labStaff.setLabBranch(labBranch);
-            labStaff.setPassword(password);
-            labStaff.setPhone(phone);
-            labStaff.setUserCode(usercode);
-            labStaff.setUsername(username);
-            labStaff.setStatus(status);
+            test.setCreatedBy(testName);
+            test.setDateCreated(new Date());
+            test.setDeleted(testName);
+            test.setTestCode(testName);
+            test.setTestDescription(testDescription);
+            test.setTestId(testName);
+            test.setTestName(testName);
 
-            Integer StaffId = labStaffBean.labStaffCreate(labStaff);
-            if (StaffId == null) {
+            String testId = testBean.testCreate(test);
+            if (testId == null) {
                 return Response.ok("UNABLE TO CREATE STAFF").build();
             }
             return Response.ok("STAFF CREATED SUCCESSFULLY").build();
