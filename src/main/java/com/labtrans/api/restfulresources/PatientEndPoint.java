@@ -104,7 +104,7 @@ public class PatientEndPoint {
             if (pId == null) {
                 return Response.ok("UNABLE TO CREATE USER").build();
             }
-            return Response.ok(pId).build();
+            return Response.ok("USER CREATED SUCCESSFULLY").build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -150,7 +150,7 @@ public class PatientEndPoint {
                 System.out.println("nothkin heeeee");
                 return Response.ok("empty results").build();
             } else {
-                System.out.println("sometinn heerrr");
+                System.out.println("/.............."+pendingSession);
                 return Response.ok(pendingSession).build();
             }
         } catch (Exception e) {

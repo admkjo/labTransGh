@@ -50,9 +50,9 @@ public class LabSession implements Serializable {
     @Size(max = 10)
     @Column(name = "col_send_to_patient_status")
     private String sendToPatientStatus;
-    @Size(max = 10)
-    @Column(name = "col_send_to_doc_status")
-    private String sendToDocStatus;
+//    @Size(max = 10)
+//    @Column(name = "col_send_to_doc_status")
+//    private String sendToDocStatus;
     @Size(max = 10)
     @Column(name = "col_payment_status")
     private String paymentStatus;
@@ -149,14 +149,14 @@ public class LabSession implements Serializable {
     public void setSendToPatientStatus(String sendToPatientStatus) {
         this.sendToPatientStatus = sendToPatientStatus;
     }
-
-    public String getSendToDocStatus() {
-        return sendToDocStatus;
-    }
-
-    public void setSendToDocStatus(String sendToDocStatus) {
-        this.sendToDocStatus = sendToDocStatus;
-    }
+//
+//    public String getSendToDocStatus() {
+//        return sendToDocStatus;
+//    }
+//
+//    public void setSendToDocStatus(String sendToDocStatus) {
+//        this.sendToDocStatus = sendToDocStatus;
+//    }
 
     public String getPaymentStatus() {
         return paymentStatus;

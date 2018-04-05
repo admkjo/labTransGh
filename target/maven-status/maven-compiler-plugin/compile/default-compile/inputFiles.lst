@@ -40,6 +40,7 @@ C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtran
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\jwtfilter\JWTTokenNeededFilter.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\LabAccount.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\api\restfulresources\DoctorEndPoint.java
+C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\dto\LabStaffDTO.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\LabSession.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\sessionbean\SessionTestsBean.java
 C:\Users\Adm_Kjo\Documents\NetBeansProjects\LabTransGh\src\main\java\com\labtrans\ejb\entities\TestParams.java

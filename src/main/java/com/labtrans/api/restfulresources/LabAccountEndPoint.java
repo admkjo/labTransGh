@@ -1,19 +1,23 @@
 package com.labtrans.api.restfulresources;
 
+import com.labtrans.dto.LabBranchDTO;
+import com.labtrans.dto.LabStaffDTO;
 import com.labtrans.ejb.entities.LabAccount;
 import com.labtrans.ejb.entities.LabBranch;
 import com.labtrans.ejb.entities.LabStaff;
+import com.labtrans.ejb.entities.Test;
 import com.labtrans.ejb.sessionbean.LabAccountBean;
 import com.labtrans.ejb.sessionbean.LabBranchBean;
 import com.labtrans.ejb.sessionbean.LabStaffBean;
+import com.labtrans.ejb.sessionbean.TestBean;
 import com.labtrans.jwtfilter.JWTTokenNeeded;
 import com.labtrans.util.JWTokenUtility;
 import com.labtrans.util.PasswordUtils;
 import com.labtrans.util.RandomStringGenerator;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -48,6 +52,8 @@ public class LabAccountEndPoint {
     private LabBranchBean labBranchBean;
     @EJB
     private LabStaffBean labStaffBean;
+    @EJB
+    private TestBean testBean;
 
     private static final Logger LOGGER = Logger.getLogger(LabAccountEndPoint.class.getName());
 
@@ -72,7 +78,13 @@ public class LabAccountEndPoint {
             } else {
                 return Response.ok("Please Complete All Fields").build();
             }
-            String labcode = "LAB-" + UUID.randomUUID().toString();
+
+            //make username unique
+            List<LabAccount> labAccountchkList = labAccountBean.labAccountFindByAttribute("username", username, false);
+            if (!(labAccountchkList.isEmpty())) {
+                return Response.ok("CHANGE USERNAME").build();
+            }
+            String labcode = "LAB-" + RandomStringGenerator.randomString(5);
             password = PasswordUtils.digestPassword(password);
             LabAccount labAccount = new LabAccount();
             labAccount.setPassword(password);
@@ -90,7 +102,57 @@ public class LabAccountEndPoint {
             if (LabId == null) {
                 return Response.ok("UNABLE TO CREATE ACCOUNT").build();
             }
-            return Response.ok(LabId).build();
+            return Response.ok("ACCOUNT CREATED SUCCESSFULLY").build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @POST
+    @Path("/create_test")
+    @Consumes(APPLICATION_FORM_URLENCODED)
+    @JWTTokenNeeded
+    public Response createTest(
+            @FormParam("testName") String testName,
+            @FormParam("testDescription") String testDescription,
+            @FormParam("branchCode") String branchCode) {
+        try {
+            //check for empty inputs
+            if (StringUtils.isNotBlank(testName) && StringUtils.isNotBlank(testDescription) && StringUtils.isNotBlank(branchCode)) {
+            } else {
+                return Response.ok("Please Complete All Fields").build();
+            }
+
+            //get lab branch
+            List<LabBranch> labBranchList = labBranchBean.labBranchFindByAttribute("branchCode", branchCode, false);
+            if (labBranchList.isEmpty()) {
+                return Response.ok("UNKNOWN BRANCH").build();
+            }
+            LabBranch labBranch = labBranchList.get(0);
+            //make test name unique
+            List<Test> tests = testBean.testFindByAttribute("testName", testName, true);
+            if (!(tests.isEmpty())) {
+                return Response.ok("CHANGE TEST NAME").build();
+            }
+
+            Test test = new Test();
+            labStaff.setDateCreated(new Date());
+            labStaff.setDeleted("NO");
+            labStaff.setEmail(email);
+            labStaff.setFullname(fullname);
+            labStaff.setLabBranch(labBranch);
+            labStaff.setPassword(password);
+            labStaff.setPhone(phone);
+            labStaff.setUserCode(usercode);
+            labStaff.setUsername(username);
+            labStaff.setStatus(status);
+
+            Integer StaffId = labStaffBean.labStaffCreate(labStaff);
+            if (StaffId == null) {
+                return Response.ok("UNABLE TO CREATE STAFF").build();
+            }
+            return Response.ok("STAFF CREATED SUCCESSFULLY").build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,7 +167,7 @@ public class LabAccountEndPoint {
             @FormParam("fullname") String fullname,
             @FormParam("password") String password,
             @FormParam("phone") String phone,
-            @FormParam("branchId") String branchId,
+            @FormParam("branchCode") String branchCode,
             @FormParam("username") String username,
             @FormParam("usercode") String usercode,
             @FormParam("status") String status,
@@ -114,7 +176,7 @@ public class LabAccountEndPoint {
         try {
             //check for empty inputs
             if (StringUtils.isNotBlank(email) && StringUtils.isNotBlank(fullname)
-                    && StringUtils.isNotBlank(branchId) && StringUtils.isNotBlank(password)
+                    && StringUtils.isNotBlank(branchCode) && StringUtils.isNotBlank(password)
                     && StringUtils.isNotBlank(phone) && StringUtils.isNotBlank(username)
                     && StringUtils.isNotBlank(usercode) && StringUtils.isNotBlank(status)) {
             } else {
@@ -122,8 +184,16 @@ public class LabAccountEndPoint {
             }
 
             //get lab branch
-            List<LabBranch> labBranchList = labBranchBean.labBranchFindByAttribute("branchId", branchId, false);
+            List<LabBranch> labBranchList = labBranchBean.labBranchFindByAttribute("branchCode", branchCode, false);
+            if (labBranchList.isEmpty()) {
+                return Response.ok("UNKNOWN BRANCH").build();
+            }
             LabBranch labBranch = labBranchList.get(0);
+            //make username unique
+            List<LabStaff> labStaffs = labStaffBean.labStaffFindByAttribute("username", username, false);
+            if (!(labStaffs.isEmpty())) {
+                return Response.ok("CHANGE USERNAME").build();
+            }
 
             LabStaff labStaff = new LabStaff();
             labStaff.setDateCreated(new Date());
@@ -141,7 +211,7 @@ public class LabAccountEndPoint {
             if (StaffId == null) {
                 return Response.ok("UNABLE TO CREATE STAFF").build();
             }
-            return Response.ok(branchId).build();
+            return Response.ok("STAFF CREATED SUCCESSFULLY").build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -193,11 +263,14 @@ public class LabAccountEndPoint {
             } else {
                 return Response.ok("Please Complete All Fields").build();
             }
+
+            //get lab account
             Principal principal = securityContext.getUserPrincipal();
             String labcode = principal.getName();
             List<LabAccount> labAccountList = labAccountBean.labAccountFindByAttribute("labcode", labcode, false);
             LabAccount labAccount = labAccountList.get(0);
             String branchcode = "LAB-" + labAccount.getLabcode() + "-" + RandomStringGenerator.randomString(5);
+            LOGGER.info("labAccount ........" + labAccount.toString());
 
             LabBranch labBranch = new LabBranch();
             labBranch.setBranchCode(branchcode);
@@ -214,7 +287,7 @@ public class LabAccountEndPoint {
             if (branchId == null) {
                 return Response.ok("UNABLE TO CREATE LAB BRANCH").build();
             }
-            return Response.ok(branchId).build();
+            return Response.ok("LAB BRANCH CREATED SUCCESSFULLY").build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -268,7 +341,7 @@ public class LabAccountEndPoint {
             if (LabId == false) {
                 return Response.ok("UNABLE TO GENERATE CODE").build();
             }
-            return Response.ok(LabId).build();
+            return Response.ok("CODE GENERATED SUCCESSFULLY").build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -296,7 +369,7 @@ public class LabAccountEndPoint {
             if (LabId == false) {
                 return Response.ok("UNABLE TO UPDATE PASSWORD").build();
             }
-            return Response.ok(LabId).build();
+            return Response.ok("PASSWORD UPDATED SUCCESSFULLY").build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -307,16 +380,30 @@ public class LabAccountEndPoint {
     @POST
     @Consumes(APPLICATION_FORM_URLENCODED)
     @JWTTokenNeeded
-    public Response allStaff(@Context SecurityContext securityContext) {
+    public Response allStaff() {
         try {
             List<LabStaff> labStaffList = labStaffBean.labStaffGetAll(false);
-            GenericEntity<List<LabStaff>> allLabStaff = new GenericEntity<List<LabStaff>>(labStaffList) {
+            List<LabStaffDTO> labStaffDTOList = new ArrayList<>();
+            for (LabStaff labStaff : labStaffList) {
+                LabStaffDTO dto = new LabStaffDTO();
+                dto.setDateCreated(labStaff.getDateCreated());
+                dto.setEmail(labStaff.getEmail());
+                dto.setFullname(labStaff.getFullname());
+                dto.setPhone(labStaff.getPhone());
+                dto.setStatus(labStaff.getStatus());
+                dto.setUserCode(labStaff.getUserCode());
+                dto.setUsername(labStaff.getUsername());
+                labStaffDTOList.add(dto);
+            }
+
+            GenericEntity<List<LabStaffDTO>> allLabStaffDTO = new GenericEntity<List<LabStaffDTO>>(labStaffDTOList) {
             };
             if (labStaffList == null) {
                 LOGGER.info("STAFF..........EMPTY LIST");
                 return Response.ok("EMPTY LIST").build();
             } else {
-                return Response.ok(allLabStaff).build();
+                LOGGER.info("..........allLabStaff........" + allLabStaffDTO);
+                return Response.ok(allLabStaffDTO).build();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -328,16 +415,32 @@ public class LabAccountEndPoint {
     @POST
     @Consumes(APPLICATION_FORM_URLENCODED)
     @JWTTokenNeeded
-    public Response allBranches(@Context SecurityContext securityContext) {
+    public Response allBranches() {
         try {
             List<LabBranch> labBranchList = labBranchBean.labBranchGetAll(false);
-            GenericEntity<List<LabBranch>> allLabBranch = new GenericEntity<List<LabBranch>>(labBranchList) {
+            List<LabBranchDTO> labBranchDTOList = new ArrayList<>();
+            for (LabBranch labBranch : labBranchList) {
+                LabBranchDTO dto = new LabBranchDTO();
+                dto.setBranchCode(labBranch.getBranchCode());
+                dto.setBranchId(labBranch.getBranchId());
+                dto.setBranchName(labBranch.getBranchName());
+                dto.setContact(labBranch.getContact());
+                dto.setDateCreated(labBranch.getDateCreated());
+                dto.setDeleted(labBranch.getDeleted());
+                dto.setEmail(labBranch.getEmail());
+                dto.setLabcode(labBranch.getLabcode());
+                dto.setLabcode(labBranch.getLabcode());
+                dto.setLocation(labBranch.getLocation());
+                dto.setRegion(labBranch.getRegion());
+                labBranchDTOList.add(dto);
+            }
+
+            GenericEntity<List<LabBranchDTO>> allLabBranchDTO = new GenericEntity<List<LabBranchDTO>>(labBranchDTOList) {
             };
             if (labBranchList == null) {
-                LOGGER.info("BRANCHES..........EMPTY LIST");
                 return Response.ok("EMPTY LIST").build();
             } else {
-                return Response.ok(allLabBranch).build();
+                return Response.ok(allLabBranchDTO).build();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -378,7 +481,7 @@ public class LabAccountEndPoint {
             if (LabId == false) {
                 return Response.ok("UNABLE TO UPDATE LAB BRANCH").build();
             }
-            return Response.ok(LabId).build();
+            return Response.ok("LAB BRANCH UPDATED SUCCESSFULLY").build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -422,7 +525,61 @@ public class LabAccountEndPoint {
             if (LabId == false) {
                 return Response.ok("UNABLE TO UPDATE STAFF").build();
             }
-            return Response.ok(LabId).build();
+            return Response.ok("STAFF UPDATED SUCCESSFULLY").build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @POST
+    @Path("/delete_lab_branch")
+    @Consumes(APPLICATION_FORM_URLENCODED)
+    @JWTTokenNeeded
+    public Response deleteLabBranch(
+            @FormParam("branchId") String branchId) {
+        try {
+            //check for empty inputs
+            if (StringUtils.isNotBlank(branchId)) {
+            } else {
+                return Response.ok("Please Complete All Fields").build();
+            }
+            List<LabBranch> labBranchList = labBranchBean.labBranchFindByAttribute("branchId", branchId, false);
+            LabBranch labBranch = labBranchList.get(0);
+
+            labBranch.setDeleted("NO");
+            boolean LabId = labBranchBean.labBranchDelete(labBranch, false);
+            if (LabId == false) {
+                return Response.ok("UNABLE TO DELETE LAB BRANCH").build();
+            }
+            return Response.ok("BRANCH DELETED SUCCESSFULLY").build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @POST
+    @Path("/delete_branch_staff")
+    @Consumes(APPLICATION_FORM_URLENCODED)
+    @JWTTokenNeeded
+    public Response deleteBranchStaff(
+            @FormParam("staffId") String staffId) {
+        try {
+            //check for empty inputs
+            if (StringUtils.isNotBlank(staffId)) {
+            } else {
+                return Response.ok("Please Complete All Fields").build();
+            }
+            List<LabStaff> labStaffList = labStaffBean.labStaffFindByAttribute("staffId", staffId, false);
+            LabStaff labStaff = labStaffList.get(0);
+
+            labStaff.setDeleted("NO");
+            boolean LabId = labStaffBean.labStaffDelete(labStaff, false);
+            if (LabId == false) {
+                return Response.ok("UNABLE TO DELETE STAFF").build();
+            }
+            return Response.ok("STAFF DELETED SUCCESSFULLY").build();
         } catch (Exception e) {
             e.printStackTrace();
         }

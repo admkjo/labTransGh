@@ -73,14 +73,14 @@ public class JWTTokenNeededFilter implements ContainerRequestFilter {
                 System.out.println("JWT validation failed");
 
                 requestContext.setProperty("auth-failed", true);
-                requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+                requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("INVALID TOKEN").build());
 
             }
 
         } else {
             System.out.println("No JWT token !");
             requestContext.setProperty("auth-failed", true);
-            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("TOKEN UNAVAILABLE").build());
         }
 
     }

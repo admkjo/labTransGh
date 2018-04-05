@@ -5,6 +5,7 @@
  */
 package com.labtrans.ejb.entities;
 
+import com.labtrans.dto.LabStaffDTO;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -19,7 +20,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -70,12 +70,15 @@ public class LabStaff implements Serializable {
     @Size(max = 45)
     @Column(name = "col_deleted")
     private String deleted;
+    @Size(max = 50)
+    @Column(name = "col_verify_code")
+    private String verifyCode;
 
     @OneToMany(mappedBy = "labStaff")
     private Collection<LabSession> labSessionCollection;
 
     @ManyToOne
-    @JoinColumn(name = "col_branch_code")
+    @JoinColumn(name = "col_branch_code", referencedColumnName = "col_branch_code")
     private LabBranch labBranch;
 
     public LabStaff() {
@@ -161,6 +164,14 @@ public class LabStaff implements Serializable {
         this.deleted = deleted;
     }
 
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
+    }
+
     public Collection<LabSession> getLabSessionCollection() {
         return labSessionCollection;
     }
@@ -168,7 +179,7 @@ public class LabStaff implements Serializable {
     public void setLabSessionCollection(Collection<LabSession> labSessionCollection) {
         this.labSessionCollection = labSessionCollection;
     }
-
+//    @XmlTransient
     public LabBranch getLabBranch() {
         return labBranch;
     }
@@ -191,10 +202,7 @@ public class LabStaff implements Serializable {
             return false;
         }
         LabStaff other = (LabStaff) object;
-        if ((this.staffId == null && other.staffId != null) || (this.staffId != null && !this.staffId.equals(other.staffId))) {
-            return false;
-        }
-        return true;
+        return !((this.staffId == null && other.staffId != null) || (this.staffId != null && !this.staffId.equals(other.staffId)));
     }
 
     @Override

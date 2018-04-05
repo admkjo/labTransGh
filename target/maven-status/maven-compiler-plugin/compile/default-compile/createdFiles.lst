@@ -8,6 +8,7 @@ com\labtrans\jwtfilter\JWTTokenNeededFilter.class
 com\labtrans\ejb\entities\LabBranchPatients.class
 com\labtrans\ejb\entities\TestParams.class
 com\labtrans\ejb\sessionbean\SessionTestsBean.class
+com\labtrans\api\restfulresources\LabAccountEndPoint$2.class
 com\labtrans\ejb\entities\LabAccount_.class
 com\labtrans\api\restfulresources\PatientEndPoint.class
 com\labtrans\util\JWTokenUtility.class
@@ -38,6 +39,7 @@ com\labtrans\ejb\sessionbean\TestBean.class
 com\labtrans\ejb\entities\TestParamDefaultValues_.class
 com\labtrans\util\EmailSender.class
 com\labtrans\ejb\entities\LabStaff_.class
+com\labtrans\dto\LabStaffDTO.class
 com\labtrans\ejb\entities\LabResults.class
 com\labtrans\util\PasswordUtils.class
 com\labtrans\api\restfulresources\LabBranchPatientsEndPoint.class
@@ -46,6 +48,7 @@ com\labtrans\ejb\entities\SessionTests.class
 com\labtrans\ejb\sessionbean\PatientBean.class
 com\labtrans\ejb\sessionbean\LabBranchBean.class
 com\labtrans\api\restfulresources\TestEndPoint.class
+com\labtrans\api\restfulresources\LabAccountEndPoint$1.class
 com\labtrans\api\restfulresources\LabStaffEndPoint.class
 com\labtrans\ejb\entities\SessionTests_.class
 com\labtrans\api\restfulresources\PatientEndPoint$1.class

@@ -5,14 +5,17 @@
  */
 package com.labtrans.ejb.sessionbean;
 
-import com.labtrans.ejb.entities.LabBranch ;
+import com.labtrans.api.restfulresources.LabAccountEndPoint;
+import com.labtrans.ejb.entities.LabBranch;
 import com.labtrans.util.PasswordUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.validation.ConstraintViolationException;
 
 /**
  *
@@ -21,21 +24,23 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class LabBranchBean {
 
- 
     @PersistenceContext(unitName = "LabTransGh-PU")
     private EntityManager em;
+    private static final Logger LOGGER = Logger.getLogger(LabAccountEndPoint.class.getName());
 
     public String labBranchCreate(LabBranch labBranch) {
         try {
             em.persist(labBranch);
             em.flush();
             return labBranch.getBranchId();
-
+        } catch (ConstraintViolationException e) {
+            LOGGER.severe("ConstraintViolationException.................................");
+            e.getConstraintViolations().forEach(err -> LOGGER.severe(err.toString()));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-
         }
+        return null;
     }
 
     public boolean labBranchDelete(LabBranch labBranch, boolean permanent) {
