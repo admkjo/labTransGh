@@ -9,11 +9,13 @@ com\labtrans\ejb\entities\LabBranchPatients.class
 com\labtrans\ejb\entities\TestParams.class
 com\labtrans\ejb\sessionbean\SessionTestsBean.class
 com\labtrans\api\restfulresources\LabAccountEndPoint$2.class
+com\labtrans\dto\DoctorDTO.class
 com\labtrans\ejb\entities\LabAccount_.class
 com\labtrans\api\restfulresources\PatientEndPoint.class
 com\labtrans\util\JWTokenUtility.class
 com\labtrans\util\RandomStringGenerator.class
 com\labtrans\ejb\entities\LabStaff.class
+com\labtrans\dto\TestDAO.class
 com\labtrans\ejb\entities\Doctor.class
 com\labtrans\api\restfulresources\DoctorPatientCircleEndPoint.class
 com\labtrans\ejb\sessionbean\LabSessionBean.class
@@ -23,6 +25,7 @@ com\labtrans\ejb\entities\DoctorPatientCirle_.class
 com\labtrans\ejb\entities\LabBranch.class
 com\labtrans\api\restfulresources\LabSessionEndPoint.class
 com\labtrans\ejb\entities\TestParams_.class
+com\labtrans\dto\LabBranchDTO.class
 com\labtrans\api\restfulresources\ApplicationConfig.class
 com\labtrans\ejb\sessionbean\LabStaffBean.class
 com\labtrans\ejb\sessionbean\LabResultsBean.class
@@ -52,6 +55,7 @@ com\labtrans\api\restfulresources\LabAccountEndPoint$1.class
 com\labtrans\api\restfulresources\LabStaffEndPoint.class
 com\labtrans\ejb\entities\SessionTests_.class
 com\labtrans\api\restfulresources\PatientEndPoint$1.class
+com\labtrans\dto\PatientDTO.class
 com\labtrans\ejb\entities\LabResults_.class
 com\labtrans\ejb\entities\TestParamDefaultValues.class
 com\labtrans\ejb\entities\Patient.class
